@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('Font/ıbm.ttf') format('opentype');
+    src: url('fonts/ıbm.ttf') format('opentype');
 }
 
 body {
@@ -9,7 +9,7 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: url('background.png') no-repeat center center fixed;
+    background: url('assets/images/background.png') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -118,7 +118,7 @@ p {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    width: 60%;
+    width: 46.2%;
     text-align: center;
     backdrop-filter: blur(5px);
     overflow: hidden;
