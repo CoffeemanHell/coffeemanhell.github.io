@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('Font/ıbm.ttf') format('opentype');
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background-1 {
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#backgroundVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+    display: none;
+}
+
+.minimal-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.0em;
+    cursor: pointer;
+    z-index: 3;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.minimal-button:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.container {
+    position: relative; 
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 50px;
+    margin: 100px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-list li {
+    transition: transform 2.0s ease, text-shadow 2.0s ease;
+}
+
+.custom-list li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 900;
+    transition: color 0.3s ease;
+}
+
+.custom-list li:hover {
+    transform: scale(1.2) translateZ(20px);
+    text-shadow: 4px 4px 4px #aeaeae71;
+}
+
+.custom-list li:hover a {
+    color: #c5c5c5;
+}
+
+/* Font kalınlığı */
+p, ul.custom-list li a {
+    font-weight: 900;
+}
