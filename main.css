@@ -7,12 +7,8 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    position: relative;
     height: 100vh;
     overflow: hidden;
-}
-
-.background-1 {
     background: url('background.png') no-repeat center center fixed;
     background-size: cover;
 }
@@ -32,24 +28,38 @@ body {
 
 .minimal-button {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    bottom: 5px;
+    right: 5px;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 0.0em;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     z-index: 3;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: background-color 0.3s ease;
 }
 
 .minimal-button:hover {
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: #ff000030;
+}
+
+.minimal-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.minimal-button:hover::after {
+    opacity: 1;
 }
 
 .overlay {
@@ -70,50 +80,61 @@ body {
     padding: 50px;
     margin: 100px auto;
     max-width: 800px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0);
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
 p {
     font-size: 1.2em;
     line-height: 1.5;
+    font-weight: 900;
 }
 
-.custom-list {
-    list-style-type: none;
-    padding: 0;
+.discord-status {
+    margin: 20px 0;
+}
+
+.discord-status img {
+    max-width: 65%;
+    height: auto;
+}
+
+.button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    margin: 20px 0;
 }
 
-.custom-list li {
-    transition: transform 2.0s ease, text-shadow 2.0s ease;
-}
-
-.custom-list li a {
+.custom-button {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.3);
     color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
     text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 900;
-    transition: color 0.3s ease;
+    font-weight: bold;
+    width: 60%;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
 }
 
-.custom-list li:hover {
-    transform: scale(1.2) translateZ(20px);
-    text-shadow: 4px 4px 4px #aeaeae71;
+.custom-button span {
+    display: inline-block;
+    transition: transform 0.3s ease;
 }
 
-.custom-list li:hover a {
-    color: #c5c5c5;
+.custom-button:hover {
+    background-color: rgba(34, 34, 34, 0.3);
 }
 
-p, ul.custom-list li a {
-    font-weight: 900;
+.custom-button:hover span {
+    transform: scale(1.1);
 }

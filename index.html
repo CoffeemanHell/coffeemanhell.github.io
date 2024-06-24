@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<link rel="icon" href="coffeeman.png" type="image/x-icon">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>coffeeman.hell</title>
+    <title>CoffeeMan.Hell</title>
+    <link rel="icon" href="coffeeman.png" type="image/x-icon">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -15,18 +15,18 @@
     <div class="container">
         <h1>CoffeeMan.Hell</h1>
         <p>More Coffee?</p>
-        <div align="center">
+        <div class="discord-status">
             <a href="https://discord.com/users/406416295349714944" target="_blank">
-                <img width="65%" src="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No coffee and exhausted&hideBadges=true&showDisplayName=true">
+                <img src="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No coffee and exhausted&hideBadges=true&showDisplayName=true" alt="Discord Status">
             </a>
         </div>
-        <ul class="custom-list">
-            <li><a href="https://discord.gg/SxWKF4HsSY" target="_blank">Discord Server</a></li>
-            <li><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank">Wallpaper Engine Projects</a></li>
-        </ul>
+        <div class="button-container">
+            <a href="https://discord.gg/SxWKF4HsSY" target="_blank" class="custom-button"><span>Join Our Discord Server</span></a>
+            <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank" class="custom-button"><span>Wallpaper Engine Projects</span></a>
+        </div>
     </div>
-    <button id="changeBackgroundButton" class="minimal-button">&#9881;</button>
-    <audio id="backgroundMusic" src="cola.mp3"></audio>
+    <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
+    <audio id="backgroundMusic" src="cola.mp3" loop></audio>
     <script src="script.js"></script>
 </body>
 </html>
