@@ -209,13 +209,13 @@ body.loading {
 #notification-box {
     background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 20px;
     text-align: center;
     color: white;
     font-family: 'ıbm';
     backdrop-filter: blur(5px);
-    max-width: 220%;
+    max-width: 20%;
     width: 19.2%;
 }
 
@@ -239,7 +239,7 @@ body.loading {
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: 'ıbm2';
     font-size: 14px;
     cursor: pointer;
