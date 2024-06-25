@@ -1,42 +1,51 @@
-// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Get references to the necessary elements
     const body = document.body;
     const toggleButton = document.getElementById('toggleButton');
     const music = document.getElementById('backgroundMusic');
     const video = document.getElementById('backgroundVideo');
+    const loadingBarContainer = document.getElementById('loading-bar-container');
+    const mainContent = document.getElementById('main-content');
 
-    // Function to toggle background and music
     function toggleBackgroundAndMusic() {
-        // Toggle the class for video background
         body.classList.toggle('video-background');
         
-        // Check if the class was added
         if (body.classList.contains('video-background')) {
-            // Show and play the video and music
             video.style.display = 'block';
-            video.currentTime = 0; // Reset video time to start
+            video.currentTime = 0;
             video.play();
             music.play();
         } else {
-            // Hide and pause the video and music
             video.style.display = 'none';
             video.pause();
             music.pause();
-            music.currentTime = 0; // Reset music time to start
+            music.currentTime = 0;
         }
     }
 
-    // Add click event listener to the toggle button
     toggleButton.addEventListener('click', toggleBackgroundAndMusic);
+
+    function showPage(pageId) {
+        document.querySelectorAll('.container').forEach(page => page.style.display = 'none');
+        document.getElementById(pageId + '-page').style.display = 'block';
+    }
+
+    document.querySelectorAll('.custom-button[data-page]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage(this.dataset.page);
+        });
+    });
+
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            loadingBarContainer.style.opacity = '0';
+            mainContent.style.display = 'block';
+            
+            setTimeout(function() {
+                loadingBarContainer.style.display = 'none';
+                body.classList.remove('loading');
+                body.classList.add('loaded');
+            }, 200); // Bu süre, CSS'deki geçiş süresiyle eşleşmeli
+        }, 1000);
+    });
 });
-
-// Function to change pages
-function showPage(pageId) {
-    // Hide all pages
-    document.getElementById('main-page').style.display = 'none';
-    document.getElementById('about-page').style.display = 'none';
-
-    // Show the requested page
-    document.getElementById(pageId + '-page').style.display = 'block';
-}

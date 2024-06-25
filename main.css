@@ -1,171 +1,190 @@
-/* Custom font definition */
 @font-face {
     font-family: 'ıbm';
-    src: url('assets/fonts/ıbm.ttf') format('opentype');
+    src: url('assets/fonts/ıbm.ttf') format('truetype');
 }
 
-/* Another custom font definition */
 @font-face {
     font-family: 'ıbm2';
     src: url('assets/fonts/ıbm2.ttf') format('truetype');
-    /* If you have different font formats, you can also add them:
-    src: url('assets/fonts/yeni-font.woff2') format('woff2'),
-         url('assets/fonts/yeni-font.woff') format('woff'),
-         url('assets/fonts/yeni-font.ttf') format('truetype');
-    */
 }
 
-/* General page styles */
 body {
-    font-family: 'ıbm'; /* Sets the default font */
-    margin: 0; /* Resets the margin */
-    padding: 0; /* Resets the padding */
-    height: 100vh; /* Sets height to full viewport height */
-    overflow: hidden; /* Hides overflow content */
-    background: url('assets/images/background.png') no-repeat center center fixed; /* Background image settings */
-    background-size: cover; /* Ensures background image covers the entire area */
+    font-family: 'ıbm', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url('assets/images/background.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Background video styles */
 #backgroundVideo {
-    position: fixed; /* Fixed position */
+    position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; /* Minimum width */
-    min-height: 100%; /* Minimum height */
-    width: auto; /* Automatic width */
-    height: auto; /* Automatic height */
-    z-index: -1; /* Z-index setting */
-    object-fit: cover; /* Ensures the video covers the entire area */
-    display: none; /* Initially hides the video */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+    display: none;
 }
 
-/* Minimal button styles */
 .minimal-button {
-    position: fixed; /* Fixed position */
-    bottom: 5px; /* 5px from the bottom */
-    right: 5px; /* 5px from the right */
-    background-color: transparent; /* Transparent background */
-    border: none; /* No border */
-    border-radius: 50%; /* Circular shape */
-    width: 40px; /* Width */
-    height: 40px; /* Height */
-    cursor: pointer; /* Cursor changes to pointer */
-    z-index: 3; /* Z-index setting */
-    transition: background-color 0.3s ease; /* Background color transition */
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 0.3s ease;
 }
 
-/* Background color change on hover */
 .minimal-button:hover {
-    background-color: #ff000030;
+    background-color: rgba(255, 0, 0, 0.3);
 }
 
-/* Content of the minimal button */
 .minimal-button::after {
-    content: ''; /* No content */
-    position: absolute; /* Absolute position */
-    top: 50%; /* 50% from the top */
-    left: 50%; /* 50% from the left */
-    transform: translate(-50%, -50%); /* Centering */
-    width: 15px; /* Width */
-    height: 15px; /* Height */
-    background-color: rgba(255, 255, 255, 0.5); /* Background color */
-    border-radius: 50%; /* Circular shape */
-    opacity: 0; /* Transparent */
-    transition: opacity 0.3s ease; /* Opacity transition */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-/* Makes the button content visible on hover */
 .minimal-button:hover::after {
     opacity: 1;
 }
 
-/* Overlay for the page */
 .overlay {
-    position: fixed; /* Fixed position */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    z-index: 1; /* Z-index setting */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
-/* Content container */
 .container {
-    position: relative; /* Relative position */
-    z-index: 2; /* Z-index setting */
-    text-align: center; /* Center text */
-    color: white; /* Text color white */
-    padding: 50px; /* Padding */
-    margin: 100px auto; /* Margin and centering */
-    max-width: 800px; /* Maximum width */
+    width: auto;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 50px;
+    margin: 100px auto;
+    max-width: 800px;
 }
 
-/* Heading styles */
 h1 {
-    font-size: 2.5em; /* Font size */
-    margin-bottom: 20px; /* Bottom margin */
+    font-size: 2.5em;
+    margin-bottom: 20px;
 }
 
-/* Paragraph styles */
 p {
-    font-size: 1.2em; /* Font size */
-    line-height: 1.5; /* Line height */
-    font-weight: 900; /* Font weight */
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 900;
 }
 
-/* Discord status container */
 .discord-status {
-    margin: 20px 0; /* Top and bottom margin */
+    margin: 20px 0;
 }
 
-/* Discord status image styles */
 .discord-status img {
-    max-width: 65%; /* Maximum width */
-    height: auto; /* Automatic height */
+    max-width: 65%;
+    height: auto;
 }
 
-/* Button container */
 .button-container {
-    display: flex; /* Flexbox layout */
-    flex-direction: column; /* Vertical direction */
-    align-items: center; /* Center items */
-    gap: 15px; /* Gap between items */
-    margin: 20px 0; /* Top and bottom margin */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
 }
 
-/* Custom button styles */
 .custom-button {
-    display: inline-block; /* Inline block */
-    background-color: rgba(0, 0, 0, 0.3); /* Background color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* No underline */
-    font-weight: bold; /* Bold font */
-    width: 46.2%; /* Width */
-    text-align: center; /* Center text */
-    backdrop-filter: blur(5px); /* Blur background */
-    overflow: hidden; /* Hide overflow */
-    position: relative; /* Relative position */
-    transition: background-color 0.3s ease; /* Background color transition */
-    font-family: 'ıbm2'; /* Custom font */
-    font-size: 16px; /* Font size */
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 46.2%;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
+    font-family: 'ıbm2', sans-serif;
+    font-size: 16px;
 }
 
-/* Span element inside custom button */
 .custom-button span {
-    display: inline-block; /* Inline block */
-    transition: transform 0.3s ease; /* Transform transition */
+    display: inline-block;
+    transition: transform 0.3s ease;
 }
 
-/* Custom button background color change on hover */
 .custom-button:hover {
     background-color: rgba(34, 34, 34, 0.3);
 }
 
-/* Scale up the span element on hover */
 .custom-button:hover span {
     transform: scale(1.1);
+}
+
+#loading-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+#loading-bar {
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) , rgba(255, 255, 255, 0.4) 50%, rgba(0, 0, 0, 0.5) 75%);
+    background-size: 200% 100%;
+    animation: loadingAnimation 2s linear infinite;
+    border-radius: 10px;
+}
+
+@keyframes loadingAnimation {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+#main-content {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded #main-content {
+    opacity: 1;
+}
+
+body.loading {
+    overflow: hidden;
 }
