@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingBarContainer.style.display = 'none';
                 body.classList.remove('loading');
                 body.classList.add('loaded');
-            }, 200); // Bu süre, CSS'deki geçiş süresiyle eşleşmeli
-        }, 1000);
+            }, 1000); // Bu süre, CSS'deki geçiş süresiyle eşleşmeli
+        }, 100);
     });
 });
