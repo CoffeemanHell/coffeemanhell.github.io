@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             notificationOverlay.classList.add('hidden');
             notificationBox.classList.remove('hiding');
             if (callback) callback();
-        }, 300); // Bu süre, CSS'teki animasyon süresiyle eşleşmeli
+        }, 100);
     }
     window.addEventListener('load', function() {
         setTimeout(function() {
