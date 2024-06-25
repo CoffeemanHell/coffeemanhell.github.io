@@ -22,3 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     toggleButton.addEventListener('click', toggleBackgroundAndMusic);
 });
+
+// Sayfa değiştirme fonksiyonu
+function showPage(pageId) {
+    // Tüm sayfaları gizle
+    document.getElementById('main-page').style.display = 'none';
+    document.getElementById('about-page').style.display = 'none';
+
+    // İstenen sayfayı göster
+    document.getElementById(pageId + '-page').style.display = 'block';
+}

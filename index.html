@@ -12,7 +12,7 @@
     <video id="backgroundVideo" loop muted>
         <source src="assets/images/cola.mp4" type="video/mp4">
     </video>
-    <div class="container">
+    <div class="container" id="main-page">
         <h1>CoffeeMan.Hell</h1>
         <p>More Coffee?</p>
         <div class="discord-status">
@@ -23,6 +23,14 @@
         <div class="button-container">
             <a href="https://discord.gg/SxWKF4HsSY" target="_blank" class="custom-button"><span>Join Our Discord Server</span></a>
             <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank" class="custom-button"><span>Wallpaper Engine Projects</span></a>
+            <a href="#" onclick="showPage('about'); return false;" class="custom-button"><span>About</span></a>
+        </div>
+    </div>
+    <div class="container" id="about-page" style="display: none;">
+        <h1>About CoffeeMan.Hell</h1>
+        <p>This is the about page content.</p>
+        <div class="button-container">
+            <a href="#" onclick="showPage('main'); return false;" class="custom-button"><span>Back to Main</span></a>
         </div>
     </div>
     <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
