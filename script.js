@@ -53,27 +53,31 @@ document.addEventListener('DOMContentLoaded', function() {
         notificationMessage.textContent = message;
         notificationOverlay.classList.remove('hidden');
 
+        setTimeout(() => {
+            notificationOverlay.classList.add('visible');
+            document.getElementById('notification-box').classList.remove('hiding');
+        }, 10);
+    
         notificationConfirm.onclick = function(e) {
             e.stopPropagation();
-            notificationOverlay.classList.add('hidden');
+            hideNotification(confirmCallback);
             if (dontShowCheckbox.checked) {
                 sessionStorage.setItem('dontShowNotification', 'true');
             }
-            confirmCallback();
         };
-
+    
         notificationCancel.onclick = function(e) {
             e.stopPropagation();
-            notificationOverlay.classList.add('hidden');
+            hideNotification();
             if (dontShowCheckbox.checked) {
                 sessionStorage.setItem('dontShowNotification', 'true');
             }
         };
-
+    
         notificationOverlay.onclick = function() {
-            notificationOverlay.classList.add('hidden');
+            hideNotification();
         };
-
+    
         document.getElementById('notification-box').onclick = function(e) {
             e.stopPropagation();
         };
@@ -89,7 +93,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-
+    function hideNotification(callback) {
+        const notificationBox = document.getElementById('notification-box');
+        notificationBox.classList.add('hiding');
+        notificationOverlay.classList.remove('visible');
+        
+        setTimeout(() => {
+            notificationOverlay.classList.add('hidden');
+            notificationBox.classList.remove('hiding');
+            if (callback) callback();
+        }, 300); // Bu süre, CSS'teki animasyon süresiyle eşleşmeli
+    }
     window.addEventListener('load', function() {
         setTimeout(function() {
             loadingBarContainer.style.opacity = '0';
