@@ -1,10 +1,20 @@
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'ıbm';
     src: url('assets/fonts/ıbm.ttf') format('opentype');
 }
 
+@font-face {
+    font-family: 'ıbm2';
+    src: url('assets/fonts/ıbm2.ttf') format('truetype');
+    /* If you have different font formats, you can also add them:
+    src: url('assets/fonts/yeni-font.woff2') format('woff2'),
+         url('assets/fonts/yeni-font.woff') format('woff'),
+         url('assets/fonts/yeni-font.ttf') format('truetype');
+    */
+}
+
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'ıbm';
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -124,6 +134,8 @@ p {
     overflow: hidden;
     position: relative;
     transition: background-color 0.3s ease;
+    font-family: 'ıbm2';
+    font-size: 16px;
 }
 
 .custom-button span {
