@@ -133,6 +133,8 @@ p {
     transition: background-color 0.3s ease;
     font-family: 'ıbm2', sans-serif;
     font-size: 16px;
+    min-width: 120px;
+
 }
 
 .custom-button span {
@@ -187,4 +189,97 @@ body.loaded #main-content {
 
 body.loading {
     overflow: hidden;
+}
+
+#notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(1px);
+
+}
+
+#notification-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-family: 'ıbm';
+    backdrop-filter: blur(5px);
+    max-width: 220%;
+    width: 19.2%;
+}
+
+#notification-message {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.notification-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#notification-overlay.hidden {
+    display: none;
+}
+
+.notification-buttons .custom-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'ıbm2';
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    min-width: 100px;
+}
+
+.notification-buttons .custom-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+#notification-confirm {
+    background-color: rgba(0, 128, 0, 0);
+}
+
+#notification-confirm:hover {
+    background-color: rgba(0, 128, 0, 0.5);
+}
+
+#notification-cancel {
+    background-color: rgba(128, 0, 0, 0);
+}
+
+#notification-cancel:hover {
+    background-color: rgba(128, 0, 0, 0.5);
+}
+
+.dont-show-again {
+    margin-top: 15px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dont-show-again input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.dont-show-again label {
+    cursor: pointer;
 }
