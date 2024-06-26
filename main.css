@@ -219,12 +219,12 @@ body.loading {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(2px);
     opacity: 0;
     transition: opacity 0.3s ease-out;
     pointer-events: none;
@@ -294,7 +294,7 @@ body.loading {
 }
 
 #notification-confirm:hover {
-    background-color: rgba(0, 128, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
 #notification-cancel {
@@ -302,7 +302,7 @@ body.loading {
 }
 
 #notification-cancel:hover {
-    background-color: rgba(128, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .dont-show-again {
