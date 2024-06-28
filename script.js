@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('backgroundVideo');
     const loadingBarContainer = document.getElementById('loading-bar-container');
     const mainContent = document.getElementById('main-content');
-    const notificationOverlay = document.getElementById('notification-overlay');
-    const notificationMessage = document.getElementById('notification-message');
-    const notificationConfirm = document.getElementById('notification-confirm');
-    const notificationCancel = document.getElementById('notification-cancel');
-    const dontShowCheckbox = document.getElementById('dont-show-checkbox');
 
     function toggleBackgroundAndMusic() {
         body.classList.toggle('video-background');
@@ -41,25 +36,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    const notificationOverlay = document.getElementById('notification-overlay');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationConfirm = document.getElementById('notification-confirm');
+    const notificationCancel = document.getElementById('notification-cancel');
+    const dontShowCheckbox = document.getElementById('dont-show-checkbox');
+
     sessionStorage.removeItem('dontShowNotification');
 
-    function showNotification(message, confirmCallback, showCancelButton = true) {
+    function showNotification(message, confirmCallback) {
         if (sessionStorage.getItem('dontShowNotification') === 'true') {
-            if (confirmCallback) confirmCallback();
+            confirmCallback();
             return;
         }
 
         notificationMessage.textContent = message;
         notificationOverlay.classList.remove('hidden');
-        
-        notificationConfirm.textContent = confirmCallback ? 'Refresh' : 'Yes';
-        notificationCancel.style.display = showCancelButton ? 'inline-block' : 'none';
 
         setTimeout(() => {
             notificationOverlay.classList.add('visible');
             document.getElementById('notification-box').classList.remove('hiding');
         }, 10);
-
+    
         notificationConfirm.onclick = function(e) {
             e.stopPropagation();
             hideNotification(confirmCallback);
@@ -67,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 sessionStorage.setItem('dontShowNotification', 'true');
             }
         };
-
+    
         notificationCancel.onclick = function(e) {
             e.stopPropagation();
             hideNotification();
@@ -75,26 +73,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 sessionStorage.setItem('dontShowNotification', 'true');
             }
         };
-
+    
         notificationOverlay.onclick = function() {
             hideNotification();
         };
-
+    
         document.getElementById('notification-box').onclick = function(e) {
             e.stopPropagation();
         };
-    }
-
-    function hideNotification(callback) {
-        const notificationBox = document.getElementById('notification-box');
-        notificationBox.classList.add('hiding');
-        notificationOverlay.classList.remove('visible');
-        
-        setTimeout(() => {
-            notificationOverlay.classList.add('hidden');
-            notificationBox.classList.remove('hiding');
-            if (callback) callback();
-        }, 100);
     }
 
     const externalLinks = document.querySelectorAll('a[href^="http"]');
@@ -107,28 +93,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-
-    function checkForUpdates() {
-        console.log("Checking for updates...");
-        const lastVisit = localStorage.getItem('lastVisit');
-        const currentDate = new Date().toISOString().split('T')[0];
+    function hideNotification(callback) {
+        const notificationBox = document.getElementById('notification-box');
+        notificationBox.classList.add('hiding');
+        notificationOverlay.classList.remove('visible');
         
-        if (lastVisit && lastVisit !== currentDate) {
-            const lastModified = document.querySelector('meta[name="last-modified"]').getAttribute('content');
-            if (new Date(lastModified) > new Date(lastVisit)) {
-                showUpdateNotification();
-            }
-        }
-        
-        localStorage.setItem('lastVisit', currentDate);
+        setTimeout(() => {
+            notificationOverlay.classList.add('hidden');
+            notificationBox.classList.remove('hiding');
+            if (callback) callback();
+        }, 100);
     }
-
-    function showUpdateNotification() {
-        showNotification("The site has been updated since your last visit. Refresh to see the latest changes.", function() {
-            location.reload();
-        }, false);
-    }
-
     window.addEventListener('load', function() {
         setTimeout(function() {
             loadingBarContainer.style.opacity = '0';
@@ -141,7 +116,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         }, 100);
     });
-
-    // Call checkForUpdates when the page loads
-    checkForUpdates();
 });
