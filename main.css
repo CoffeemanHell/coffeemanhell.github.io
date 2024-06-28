@@ -344,7 +344,8 @@ body.loading {
     }
 
     #notification-box {
-        width: 95%;
+        Height: 30%;
+        width: 65%;
         max-width: none;
         padding: 15px;
     }
