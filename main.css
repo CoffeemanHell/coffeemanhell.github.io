@@ -78,15 +78,14 @@ body {
 }
 
 .container {
-    width: auto;
-    margin: auto;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
     position: relative;
     z-index: 2;
     text-align: center;
     color: white;
-    padding: 50px;
-    margin: 100px auto;
-    max-width: 800px;
+    padding: 20px;
 }
 
 h1 {
@@ -105,7 +104,7 @@ p {
 }
 
 .discord-status img {
-    max-width: 65%;
+    max-width: 100%;
     height: auto;
 }
 
@@ -125,7 +124,8 @@ p {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    width: 46.2%;
+    width: 100%;
+    max-width: 300px;
     text-align: center;
     backdrop-filter: blur(5px);
     overflow: hidden;
@@ -133,8 +133,6 @@ p {
     transition: background-color 0.3s ease;
     font-family: 'ıbm2', sans-serif;
     font-size: 16px;
-    min-width: 120px;
-
 }
 
 .custom-button span {
@@ -230,7 +228,6 @@ body.loading {
     pointer-events: none;
 }
 
-
 #notification-overlay.visible {
     opacity: 1;
     pointer-events: all;
@@ -245,8 +242,8 @@ body.loading {
     color: white;
     font-family: 'ıbm';
     backdrop-filter: blur(5px);
-    max-width: 20%;
-    width: 19.2%;
+    width: 90%;
+    max-width: 300px;
     animation: fadeInScale 0.1s ease-out;
 }
 
@@ -319,4 +316,45 @@ body.loading {
 
 .dont-show-again label {
     cursor: pointer;
+}
+
+/* Responsive design for mobile devices */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        width: 55%;
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .custom-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #notification-box {
+        width: 95%;
+        max-width: none;
+        padding: 15px;
+    }
+
+    .notification-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .notification-buttons .custom-button {
+        width: 100%;
+    }
 }
