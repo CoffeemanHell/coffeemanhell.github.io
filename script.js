@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function checkForUpdates() {
+        console.log("Checking for updates...");
         const lastVisit = localStorage.getItem('lastVisit');
         const currentDate = new Date().toISOString().split('T')[0];
         
