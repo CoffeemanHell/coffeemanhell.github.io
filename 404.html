@@ -6,18 +6,20 @@
     <title>404 - Page Not Found | CoffeeMan.Hell</title>
     <link rel="icon" href="assets/images/coffeeman.png" type="image/x-icon">
     <link rel="stylesheet" href="main.css">
-    <style>
-        #loading { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            background-color: #000; 
-            color: #fff; 
-            font-size: 1.5em; 
-        }
-        .hidden { display: none; }
-    </style>
+</head>
+<meta http-equiv="refresh" content="0;url=/" id="meta-refresh">
+<style>
+    #loading { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        background-color: #000; 
+        color: #fff; 
+        font-size: 1.5em; 
+    }
+    .hidden { display: none; }
+</style>
 </head>
 <body class="error-page">
     <div id="loading">Routing...</div>
@@ -52,7 +54,7 @@
                 .then(urls => {
                     const path = window.location.pathname.slice(1); // Remove leading slash
                     if (urls[path]) {
-                        window.location.href = urls[path];
+                        document.getElementById('meta-refresh').content = `0;url=${urls[path]}`;
                     } else {
                         document.getElementById('loading').classList.add('hidden');
                         document.getElementById('error-content').classList.remove('hidden');
@@ -68,4 +70,3 @@
         });
     </script>
 </body>
-</html>

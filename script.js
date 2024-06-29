@@ -116,17 +116,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        fetch('/urls.json')
-            .then(response => response.json())
-            .then(urls => {
-                const path = window.location.pathname.slice(1); // Baştaki slash'i kaldır
-                if (path && urls[path]) {
-                    window.location.href = urls[path];
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
+    fetch('/urls.json')
+        .then(response => response.json())
+        .then(urls => {
+            const path = window.location.pathname.slice(1); // Remove leading slash
+            if (urls[path]) {
+                window.location.href = urls[path];
+            } else {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error-content').classList.remove('hidden');
+                document.getElementById('error-message').textContent = "The page you're looking for has vanished into the void.";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error-content').classList.remove('hidden');
+            document.getElementById('error-message').textContent = "An error occurred while processing your request.";
+        });
 });
