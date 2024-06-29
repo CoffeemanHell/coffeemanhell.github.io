@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationConfirm = document.getElementById('notification-confirm');
     const notificationCancel = document.getElementById('notification-cancel');
     const dontShowCheckbox = document.getElementById('dont-show-checkbox');
-    
+    const errorCoffee = document.getElementById('error-coffee');
+
+    // Arka plan müziği ve videoyu açıp kapatan fonksiyon
     function toggleBackgroundAndMusic() {
         body.classList.toggle('video-background');
         
@@ -28,13 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Toggle button'a tıklama olayı
     toggleButton.addEventListener('click', toggleBackgroundAndMusic);
 
+    // Sayfa gösterme fonksiyonu
     function showPage(pageId) {
         document.querySelectorAll('.container').forEach(page => page.style.display = 'none');
         document.getElementById(pageId + '-page').style.display = 'block';
     }
 
+    // Tüm custom-button'lara tıklama olayı ekleme
     document.querySelectorAll('.custom-button[data-page]').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -42,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Bildirim gösterme fonksiyonu
     function showNotification(message, confirmCallback) {
         if (sessionStorage.getItem('dontShowNotification') === 'true') {
             confirmCallback();
@@ -71,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('notification-box').onclick = (e) => e.stopPropagation();
     }
 
+    // Harici bağlantılar için uyarı gösterme
     const externalLinks = document.querySelectorAll('a[href^="http"]');
     externalLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -82,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Bildirim gizleme fonksiyonu
     function hideNotification(callback) {
         const notificationBox = document.getElementById('notification-box');
         notificationBox.classList.add('hiding');
@@ -94,12 +102,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
 
+    // Sayfa yükleme işlemi ve hata yönetimi
     window.addEventListener('load', function() {
-        setTimeout(function() {
+        setTimeout(() => {
             loadingBarContainer.style.opacity = '0';
             mainContent.style.display = 'block';
             
-            setTimeout(function() {
+            setTimeout(() => {
                 loadingBarContainer.style.display = 'none';
                 body.classList.remove('loading');
                 body.classList.add('loaded');
@@ -107,8 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     });
 
-    // New functionality for errorCoffee and URL redirection
-    const errorCoffee = document.getElementById('error-coffee');
+    // ErrorCoffee elementi için sallanma efekti
     if (errorCoffee) {
         errorCoffee.addEventListener('click', function() {
             this.classList.add('shake');
@@ -116,22 +124,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // URL'leri kontrol eden ve yönlendiren fetch işlemi
     fetch('/urls.json')
         .then(response => response.json())
         .then(urls => {
-            const path = window.location.pathname.slice(1); // Remove leading slash
+            const path = window.location.pathname.slice(1); // Başındaki '/' karakterini kaldır
             if (urls[path]) {
-                window.location.href = urls[path];
+                window.location.href = urls[path]; // URL varsa yönlendir
             } else {
+                // URL bulunamazsa hata mesajı göster
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('error-content').classList.remove('hidden');
                 document.getElementById('error-message').textContent = "The page you're looking for has vanished into the void.";
             }
         })
         .catch(error => {
+            // Hata durumunda konsola hata yazdır ve hata mesajı göster
             console.error('Error:', error);
             document.getElementById('loading').classList.add('hidden');
             document.getElementById('error-content').classList.remove('hidden');
             document.getElementById('error-message').textContent = "An error occurred while processing your request.";
         });
+
+    // Uzun URL'leri kısaltan fonksiyon
+    function shortenUrl(longUrl) {
+        // Basit bir hash fonksiyonu
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // 32 bit integer'a çevir
+            }
+            return Math.abs(hash).toString(36).substr(0, 6);
+        }
+
+        const shortCode = simpleHash(longUrl);
+        const shortUrl = `https://coffeemanhell.github.io/${shortCode}`;
+
+        // Normalde burada shortCode ve longUrl'yi sunucuya kaydederdik
+        // Ancak GitHub Pages statik olduğu için, bunu manuel olarak urls.json dosyasına eklemeniz gerekecek
+        console.log(`Short URL created: ${shortUrl}`);
+        console.log(`Add this to urls.json: "${shortCode}": "${longUrl}"`);
+
+        return shortUrl;
+    }
 });
