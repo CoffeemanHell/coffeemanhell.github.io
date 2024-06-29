@@ -15,7 +15,7 @@
         <div class="error-image">
             <img src="assets/images/coffeeman.png" alt="CoffeeMan Error" id="error-coffee">
         </div>
-        <p>The page you're looking for has vanished into the void.</p>
+        <p id="error-message">The page you're looking for has vanished into the void.</p>
         <div class="button-container">
             <a href="/" class="custom-button"><span>Return to Main Page</span></a>
         </div>
@@ -28,6 +28,22 @@
                 this.classList.add('shake');
                 setTimeout(() => this.classList.remove('shake'), 500);
             });
+
+            // URL yönlendirme sistemi
+            fetch('/urls.json')
+                .then(response => response.json())
+                .then(urls => {
+                    const path = window.location.pathname.slice(1); // Remove leading slash
+                    if (urls[path]) {
+                        window.location.href = urls[path];
+                    } else {
+                        document.getElementById('error-message').textContent = "The page you're looking for has vanished into the void.";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').textContent = "An error occurred while processing your request.";
+                });
         });
     </script>
 </body>
