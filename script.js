@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('backgroundVideo');
     const loadingBarContainer = document.getElementById('loading-bar-container');
     const mainContent = document.getElementById('main-content');
+    const notificationOverlay = document.getElementById('notification-overlay');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationConfirm = document.getElementById('notification-confirm');
+    const notificationCancel = document.getElementById('notification-cancel');
+    const dontShowCheckbox = document.getElementById('dont-show-checkbox');
 
     function toggleBackgroundAndMusic() {
         body.classList.toggle('video-background');
@@ -12,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (body.classList.contains('video-background')) {
             video.style.display = 'block';
             video.currentTime = 0;
-            video.play();
-            music.play();
+            video.play().catch(error => console.error('Video play failed:', error));
+            music.play().catch(error => console.error('Music play failed:', error));
         } else {
             video.style.display = 'none';
             video.pause();
@@ -36,14 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const notificationOverlay = document.getElementById('notification-overlay');
-    const notificationMessage = document.getElementById('notification-message');
-    const notificationConfirm = document.getElementById('notification-confirm');
-    const notificationCancel = document.getElementById('notification-cancel');
-    const dontShowCheckbox = document.getElementById('dont-show-checkbox');
-
-    sessionStorage.removeItem('dontShowNotification');
-
     function showNotification(message, confirmCallback) {
         if (sessionStorage.getItem('dontShowNotification') === 'true') {
             confirmCallback();
@@ -57,30 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
             notificationOverlay.classList.add('visible');
             document.getElementById('notification-box').classList.remove('hiding');
         }, 10);
-    
-        notificationConfirm.onclick = function(e) {
+
+        function handleNotificationResponse(e, callback) {
             e.stopPropagation();
-            hideNotification(confirmCallback);
+            hideNotification(callback);
             if (dontShowCheckbox.checked) {
                 sessionStorage.setItem('dontShowNotification', 'true');
             }
-        };
+        }
     
-        notificationCancel.onclick = function(e) {
-            e.stopPropagation();
-            hideNotification();
-            if (dontShowCheckbox.checked) {
-                sessionStorage.setItem('dontShowNotification', 'true');
-            }
-        };
-    
-        notificationOverlay.onclick = function() {
-            hideNotification();
-        };
-    
-        document.getElementById('notification-box').onclick = function(e) {
-            e.stopPropagation();
-        };
+        notificationConfirm.onclick = (e) => handleNotificationResponse(e, confirmCallback);
+        notificationCancel.onclick = (e) => handleNotificationResponse(e);
+
+        notificationOverlay.onclick = () => hideNotification();
+        document.getElementById('notification-box').onclick = (e) => e.stopPropagation();
     }
 
     const externalLinks = document.querySelectorAll('a[href^="http"]');
@@ -93,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
     function hideNotification(callback) {
         const notificationBox = document.getElementById('notification-box');
         notificationBox.classList.add('hiding');
@@ -104,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (callback) callback();
         }, 100);
     }
+
     window.addEventListener('load', function() {
         setTimeout(function() {
             loadingBarContainer.style.opacity = '0';
