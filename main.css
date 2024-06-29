@@ -319,16 +319,19 @@ body.loading {
 }
 
 /* Responsive design for mobile devices */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .container {
-        width: 70%;
+        width: 55%;
+        padding: 10px;
+        margin: 20px auto;
     }
+
     h1 {
-        font-size: 1.8em;
+        font-size: 2em;
     }
 
     p {
@@ -336,8 +339,8 @@ body.loading {
     }
 
     .custom-button {
-        font-size: 12px;
-        padding: 6px 12px;
+        font-size: 14px;
+        padding: 8px 16px;
     }
 
     #notification-box {
@@ -368,7 +371,7 @@ body.loading {
 .error-page h1 {
     font-size: 6em;
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .error-image {

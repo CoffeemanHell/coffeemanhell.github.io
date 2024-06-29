@@ -7,67 +7,28 @@
     <link rel="icon" href="assets/images/coffeeman.png" type="image/x-icon">
     <link rel="stylesheet" href="main.css">
 </head>
-<style>
-    #loading { 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        height: 100vh; 
-        background-color: #000; 
-        color: #fff; 
-        font-size: 1.5em; 
-    }
-    .hidden { display: none; }
-</style>
-</head>
 <body class="error-page">
-    <div id="loading">Routing...</div>
-    <div id="error-content" class="hidden">
-        <div class="overlay"></div>
-        <div class="container" id="error-page">
-            <h1>404</h1>
-            <p>Oops! Looks like you're lost in CoffeeMan's Hell</p>
-            <div class="error-image">
-                <img src="assets/images/coffeeman.png" alt="CoffeeMan Error" id="error-coffee">
-            </div>
-            <p id="error-message">The page you're looking for has vanished into the void.</p>
-            <div class="button-container">
-                <a href="/" class="custom-button"><span>Return to Main Page</span></a>
-            </div>
+    <div class="overlay"></div>
+    <div class="container" id="error-page">
+        <h1>404</h1>
+        <p>Oops! Looks like you're lost in CoffeeMan's Hell</p>
+        <div class="error-image">
+            <img src="assets/images/coffeeman.png" alt="CoffeeMan Error" id="error-coffee">
+        </div>
+        <p>The page you're looking for has vanished into the void.</p>
+        <div class="button-container">
+            <a href="/" class="custom-button"><span>Return to Main Page</span></a>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const errorCoffee = document.getElementById('error-coffee');
-            if (errorCoffee) {
-                errorCoffee.addEventListener('click', function() {
-                    this.classList.add('shake');
-                    setTimeout(() => this.classList.remove('shake'), 500);
-                });
-            }
-
-            // URL yönlendirme sistemi
-            fetch('/urls.json')
-                .then(response => response.json())
-                .then(urls => {
-                    const path = window.location.pathname.slice(1); // Remove leading slash
-                    if (urls[path]) {
-                        document.getElementById('meta-refresh').content = `0;url=${urls[path]}`;
-                    } else {
-                        document.getElementById('loading').classList.add('hidden');
-                        document.getElementById('error-content').classList.remove('hidden');
-                        document.getElementById('error-message').textContent = "The page you're looking for has vanished into the void.";
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('loading').classList.add('hidden');
-                    document.getElementById('error-content').classList.remove('hidden');
-                    document.getElementById('error-message').textContent = "An error occurred while processing your request.";
-                });
+            errorCoffee.addEventListener('click', function() {
+                this.classList.add('shake');
+                setTimeout(() => this.classList.remove('shake'), 500);
+            });
         });
-       
     </script>
-    <script src="script.js"></script>
 </body>
+</html>
