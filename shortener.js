@@ -11,7 +11,7 @@ function shortenUrl(longUrl) {
     }
 
     const shortCode = simpleHash(longUrl);
-    const shortUrl = `https://coffeemanhell.github.io/link/${shortCode}`;
+    const shortUrl = `https://coffeemanhell.github.io/${shortCode}`;
 
     // Normalde burada shortCode ve longUrl'yi sunucuya kaydederdik
     // Ancak GitHub Pages statik olduğu için, bunu manuel olarak urls.json dosyasına eklemeniz gerekecek
