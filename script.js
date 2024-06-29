@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Existing elements and functions
     const body = document.body;
     const toggleButton = document.getElementById('toggleButton');
     const music = document.getElementById('backgroundMusic');
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationConfirm = document.getElementById('notification-confirm');
     const notificationCancel = document.getElementById('notification-cancel');
     const dontShowCheckbox = document.getElementById('dont-show-checkbox');
-
+    
     function toggleBackgroundAndMusic() {
         body.classList.toggle('video-background');
         
@@ -105,4 +106,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         }, 100);
     });
+
+    // New functionality for errorCoffee and URL redirection
+    const errorCoffee = document.getElementById('error-coffee');
+    if (errorCoffee) {
+        errorCoffee.addEventListener('click', function() {
+            this.classList.add('shake');
+            setTimeout(() => this.classList.remove('shake'), 500);
+        });
+    }
+
+    fetch('/urls.json')
+        .then(response => response.json())
+        .then(urls => {
+            const path = window.location.pathname.slice(1); // Remove leading slash
+            if (urls[path]) {
+                window.location.href = urls[path];
+            } else {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error-content').classList.remove('hidden');
+                document.getElementById('error-message').textContent = "The page you're looking for has vanished into the void.";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error-content').classList.remove('hidden');
+            document.getElementById('error-message').textContent = "An error occurred while processing your request.";
+        });
 });
