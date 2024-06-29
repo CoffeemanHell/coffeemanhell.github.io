@@ -20,7 +20,11 @@ const selectors = {
 
 // DOM elementlerini seçme fonksiyonu
 function selectElement(selector) {
-    return document.querySelector(selector);
+    const element = document.querySelector(selector);
+    if (!element) {
+        console.warn(`Element not found: ${selector}`);
+    }
+    return element;
 }
 
 // Arka plan ve müziği açıp kapatan fonksiyon
@@ -105,26 +109,39 @@ function hideNotification(callback) {
     }, 100);
 }
 
-// URL'leri kontrol eden ve yönlendiren fonksiyon
-async function handleUrlRouting() {
-    try {
-        const response = await fetch('/urls.json');
-        const urls = await response.json();
-        const path = window.location.pathname.slice(1); // Başındaki '/' karakterini kaldır
-        if (urls[path]) {
-            window.location.href = urls[path]; // URL varsa yönlendir
-        } else {
-            // URL bulunamazsa hata mesajı göster
-            showErrorContent("The page you're looking for has vanished into the void.");
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        showErrorContent("An error occurred while processing your request.");
+// GitHub Pages için URL yönlendirme fonksiyonu
+function handleGitHubPagesRouting() {
+    // Sabit URL yönlendirmeleri
+    const routes = {
+        'about': 'about.html',
+        'contact': 'contact.html',
+        // Diğer sayfalarınızı buraya ekleyin
+    };
+
+    const path = window.location.pathname.replace(/^\//, '').split('.')[0];
+    console.log('Current path:', path);
+
+    if (path === '' || path === 'index') {
+        console.log('On main page, no redirection needed');
+        return; // Ana sayfadaysa yönlendirme yapma
+    }
+
+    if (routes[path]) {
+        console.log(`Redirecting to: ${routes[path]}`);
+        window.location.href = routes[path];
+    } else if (!document.getElementById('error-content')) {
+        // Eğer 404 sayfasında değilsek ve geçerli bir rota yoksa
+        console.log('Invalid route, redirecting to 404 page');
+        window.location.href = '404.html';
+    } else {
+        console.log('On 404 page, showing error content');
+        showErrorContent("The page you're looking for has vanished into the void.");
     }
 }
 
 // Hata içeriğini gösteren fonksiyon
 function showErrorContent(message) {
+    console.log('Showing error content:', message);
     const loading = selectElement(selectors.loading);
     const errorContent = selectElement(selectors.errorContent);
     const errorMessage = selectElement(selectors.errorMessage);
@@ -136,22 +153,22 @@ function showErrorContent(message) {
 
 // Sayfa yükleme işlemi
 function handlePageLoad() {
+    console.log('Page load handler started');
     const loadingBarContainer = selectElement(selectors.loadingBarContainer);
     const mainContent = selectElement(selectors.mainContent);
     const body = selectElement(selectors.body);
 
+    if (loadingBarContainer) loadingBarContainer.style.opacity = '0';
+    if (mainContent) mainContent.style.display = 'block';
+    
     setTimeout(() => {
-        if (loadingBarContainer) loadingBarContainer.style.opacity = '0';
-        if (mainContent) mainContent.style.display = 'block';
-        
-        setTimeout(() => {
-            if (loadingBarContainer) loadingBarContainer.style.display = 'none';
-            if (body) {
-                body.classList.remove('loading');
-                body.classList.add('loaded');
-            }
-        }, 1000);
-    }, 100);
+        if (loadingBarContainer) loadingBarContainer.style.display = 'none';
+        if (body) {
+            body.classList.remove('loading');
+            body.classList.add('loaded');
+        }
+        console.log('Page load complete');
+    }, 1000);
 }
 
 // Event listener'ları ekleyen fonksiyon
@@ -191,10 +208,11 @@ function addEventListeners() {
 
 // Ana fonksiyon
 function init() {
+    console.log('Initializing...');
     addEventListeners();
-    handleUrlRouting();
-    window.addEventListener('load', handlePageLoad);
+    handleGitHubPagesRouting();
 }
 
 // Sayfa yüklendiğinde init fonksiyonunu çağır
 document.addEventListener('DOMContentLoaded', init);
+window.addEventListener('load', handlePageLoad);
