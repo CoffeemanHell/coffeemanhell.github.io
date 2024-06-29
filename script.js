@@ -113,8 +113,11 @@ function hideNotification(callback) {
 function handleGitHubPagesRouting() {
     // Sabit URL yönlendirmeleri
     const routes = {
-        'about': 'about.html',
-        'contact': 'contact.html',
+        'git': 'https://github.com/CoffeemanHell',
+        'dc': 'https://discord.gg/SxWKF4HsSY',
+        'wp': 'https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244',
+        '21st': 'https://discord.com/users/980928434748424263',
+        'steam': 'https://steamcommunity.com/id/coffeeman_hell',
         // Diğer sayfalarınızı buraya ekleyin
     };
 
