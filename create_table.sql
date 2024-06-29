@@ -1,6 +1,0 @@
-CREATE TABLE short_urls (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    short_code VARCHAR(10) UNIQUE,
-    long_url TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
