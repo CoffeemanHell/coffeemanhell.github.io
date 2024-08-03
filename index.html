@@ -32,8 +32,6 @@
             color: rgb(225, 225, 225);
             padding: 20px;
         }
-    </style>
-    <style>
         body.loading #main-content { display: none; }
         body.loading { background-color: black; overflow: hidden; }
     </style>
@@ -53,7 +51,7 @@
     </div>
     <div id="main-content">
         <div class="overlay"></div>
-        <video id="backgroundVideo" loop muted preload="none" loading="lazy">
+        <video id="backgroundVideo" loop muted preload="none" loading="lazy" aria-hidden="true">
             <source src="assets/images/cola.webm" type="video/webm">
         </video>
         <div class="container" id="main-page">
