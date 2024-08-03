@@ -1,0 +1,329 @@
+@font-face {
+    font-family: 'IBM';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/fonts/IBM.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM2';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/fonts/IBM2.ttf') format('truetype');
+    font-display: swap;
+}
+
+#backgroundVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+    display: none;
+}
+
+.minimal-button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 0.3s ease;
+}
+
+.minimal-button:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.minimal-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.minimal-button:hover::after {
+    opacity: 1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+.discord-status {
+    margin: 20px 0;
+}
+
+.discord-status img {
+    max-width: 100%;
+    height: auto;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.custom-button {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgb(225, 225, 225);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
+    font-family: 'IBM2';
+    font-size: 16px;
+}
+
+.custom-button span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: rgba(34, 34, 34, 0.3);
+}
+
+.custom-button:hover span {
+    transform: scale(1.1);
+}
+
+#loading-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+#loading-bar {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) , rgba(0, 0, 0, 0.5) 50%, rgba(255, 255, 255, 0.8) 75%);
+    background-size: 200% 100%;
+    animation: loadingAnimation 1.5s linear infinite;
+    border-radius: 5px;
+}
+
+@keyframes loadingAnimation {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+#main-content {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded #main-content {
+    opacity: 1;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+@keyframes fadeInScale{from{opacity:0;transform:scale(0.2);}to{opacity:1;transform:scale(1);}}
+@keyframes fadeOutScale{from{opacity:1;transform:scale(1);}to{opacity:0;transform:scale(0.2);}}
+
+#notification-overlay {
+    inset: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+}
+
+#notification-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#notification-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-family: 'IBM';
+    backdrop-filter: blur(5px);
+    width: 90%;
+    max-width: 300px;
+    animation: fadeInScale 0.1s ease-out;
+}
+
+#notification-box.hiding {
+    animation: fadeOutScale 0.3s ease-in forwards;
+}
+
+#notification-message {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.notification-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.notification-buttons .custom-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'IBM2', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.notification-buttons .custom-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+#notification-confirm {
+    background-color: rgba(0, 128, 0, 0);
+}
+
+#notification-confirm:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+#notification-cancel {
+    background-color: transparent;
+}
+
+#notification-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 480px) {
+    body { font-size: 12px; }
+    .container { width: 90%; }
+    h1 { font-size: 1.8em; }
+    p { font-size: 1em; }
+    .custom-button { 
+        font-size: 12px; 
+        padding: 6px 12px;
+    }
+    #notification-box {
+        width: 90%;
+        max-width: none;
+        padding: 15px;
+    }
+    .notification-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.error-page .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.error-page h1 {
+    font-size: 6em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.error-image {
+    margin: 20px 0;
+}
+
+#error-coffee {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#error-coffee:hover {
+    transform: scale(1.1);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+#error-coffee.shake {
+    animation: shake 0.5s;
+}
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

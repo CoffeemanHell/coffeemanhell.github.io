@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.app; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none';">
+    <meta name="description" content="coffeeman.hell Custom page.">
+    <meta http-equiv="Cache-Control" content="public, max-age=2592000">
+    <title>CoffeeMan.Hell</title>
+    <link rel="icon" href="assets/images/coffeeman.webp" type="image/webp">
+    <link rel="preload" href="main.css?v=1.0.1" as="style">
+    <link rel="stylesheet" href="main.css?v=1.0.1">
+    <link rel="preload" href="assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
+    <style>
+        body {
+            font-family: 'IBM';
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: url('assets/images/background.avif') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: rgb(225, 225, 225);
+            padding: 20px;
+        }
+    </style>
+    <style>
+        body.loading #main-content { display: none; }
+        body.loading { background-color: black; overflow: hidden; }
+    </style>
+</head>
+<body class="loading">
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+    </div>
+    <div id="notification-overlay" class="hidden">
+        <div id="notification-box">
+            <p id="notification-message"></p>
+            <div class="notification-buttons">
+                <button id="notification-cancel" class="custom-button" aria-label="Cancel">No</button>
+                <button id="notification-confirm" class="custom-button" aria-label="Confirm">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div id="main-content">
+        <div class="overlay"></div>
+        <video id="backgroundVideo" loop muted preload="none" loading="lazy">
+            <source src="assets/images/cola.webm" type="video/webm">
+        </video>
+        <div class="container" id="main-page">
+            <h1>CoffeeMan.Hell</h1>
+            <p>More Coffee?</p>
+            <div class="discord-status">
+                <a href="https://discord.com/users/406416295349714944" target="_blank" rel="noopener">
+                    <img src="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No coffee and exhausted&hideBadges=true&showDisplayName=true" alt="Discord Status" width="400" height="150">
+                </a>
+            </div>
+            <div class="button-container">
+                <a href="https://discord.gg/SxWKF4HsSY" target="_blank" rel="noopener" class="custom-button"><span>Join Our Discord Server</span></a>
+                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank" rel="noopener" class="custom-button"><span>Wallpaper Engine Projects</span></a>
+                <a href="https://github.com/CoffeemanHell" target="_blank" rel="noopener" class="custom-button"><span>GitHub</span></a>
+                <a href="#" class="custom-button" data-page="about"><span>About</span></a>
+            </div>
+        </div>
+        <div class="container" id="about-page" style="display: none;">
+            <h1>About CoffeeMan.Hell</h1>
+            <p>This is the about page content.</p>
+            <div class="button-container">
+                <a href="#" class="custom-button" data-page="main"><span>Back to Main</span></a>
+            </div>
+        </div>
+        <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
+        <audio id="backgroundMusic" preload="none" src="assets/sound/cola.opus" loop></audio>
+    </div>
+    <audio id="clickSound" preload="auto">
+        <source src="assets/sound/click.opus" type="audio/ogg">
+    </audio>
+    <script src="script.js?v=1.0.1" defer></script>
+</body>
+</html>
