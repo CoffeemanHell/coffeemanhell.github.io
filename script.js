@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const elements = {
         body: document.body,
         toggleButton: document.getElementById("toggleButton"),
@@ -11,62 +11,73 @@ document.addEventListener('DOMContentLoaded', function() {
         notificationConfirm: document.getElementById("notification-confirm"),
         notificationCancel: document.getElementById("notification-cancel"),
         clickSound: document.getElementById("clickSound"),
-        document: document
     };
 
-    function toggleMedia() {
-        elements.body.classList.toggle("video-background");
-        if (elements.body.classList.contains("video-background")) {
-            elements.backgroundVideo.style.display = "block";
-            elements.backgroundVideo.currentTime = 0;
+    const toggleMedia = () => {
+        const { body, backgroundVideo, backgroundMusic } = elements;
+        body.classList.toggle("video-background");
+
+        if (body.classList.contains("video-background")) {
+            backgroundVideo.style.display = "block";
+            backgroundVideo.currentTime = 0;
             Promise.all([
-                elements.backgroundVideo.play().catch(error => console.error("Video play failed:", error)),
-                elements.backgroundMusic.play().catch(error => console.error("Music play failed:", error))
+                backgroundVideo.play().catch(error => console.error("Video play failed:", error)),
+                backgroundMusic.play().catch(error => console.error("Music play failed:", error))
             ]);
         } else {
-            elements.backgroundVideo.style.display = "none";
-            elements.backgroundVideo.pause();
-            elements.backgroundMusic.pause();
-            elements.backgroundMusic.currentTime = 0;
+            backgroundVideo.style.display = "none";
+            backgroundVideo.pause();
+            backgroundMusic.pause();
+            backgroundMusic.currentTime = 0;
         }
-    }
+    };
 
-    function showPage(page) {
+    const showPage = (page) => {
         document.querySelectorAll(".container").forEach(container => {
             container.style.display = "none";
         });
-        document.getElementById(page + "-page").style.display = "block";
-    }
+        document.getElementById(`${page}-page`).style.display = "block";
+    };
 
-    function showNotification(message, confirmCallback) {
-        elements.notificationMessage.textContent = message;
-        elements.notificationOverlay.classList.remove("hidden");
-        elements.notificationOverlay.classList.add("visible");
-        elements.notificationConfirm.onclick = () => hideNotification(confirmCallback);
-        elements.notificationCancel.onclick = hideNotification;
-        elements.notificationOverlay.onclick = hideNotification;
+    const showNotification = (message, confirmCallback) => {
+        const { notificationMessage, notificationOverlay, notificationConfirm, notificationCancel } = elements;
+        notificationMessage.textContent = message;
+        notificationOverlay.classList.remove("hidden");
+        notificationOverlay.classList.add("visible");
+        notificationConfirm.onclick = () => hideNotification(confirmCallback);
+        notificationCancel.onclick = hideNotification;
+        notificationOverlay.onclick = hideNotification;
         document.getElementById("notification-box").onclick = event => event.stopPropagation();
-    }
+    };
 
-    function hideNotification(callback) {
-        elements.notificationOverlay.classList.remove("visible");
-        elements.notificationOverlay.classList.add("hidden");
+    const hideNotification = (callback) => {
+        const { notificationOverlay } = elements;
+        notificationOverlay.classList.remove("visible");
+        notificationOverlay.classList.add("hidden");
         if (callback) callback();
-    }
+    };
 
-    function disableContextMenu() {
-        elements.document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        }, false);
-    }
+    const disableContextMenu = () => {
+        document.addEventListener('contextmenu', e => e.preventDefault(), false);
+    };
 
-    function disableTextSelection() {
-        elements.body.classList.add('no-select');
-        
-        elements.document.addEventListener('selectstart', function(e) {
-            e.preventDefault();
-        });
-    }
+    const disableTextSelection = () => {
+        const { body } = elements;
+        body.classList.add('no-select');
+        document.addEventListener('selectstart', e => e.preventDefault());
+    };
+
+    const handlePageLinkClick = (event) => {
+        event.preventDefault();
+        const href = event.currentTarget.href;
+        showNotification("Warning: You are leaving coffeemanhell.", () => window.open(href, "_blank"));
+    };
+
+    const handleCustomButtonClick = () => {
+        const { clickSound } = elements;
+        clickSound.currentTime = 0;
+        clickSound.play().catch(error => console.error("Click sound play failed:", error));
+    };
 
     elements.toggleButton.addEventListener("click", toggleMedia);
 
@@ -78,25 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelectorAll('a[href^="http"]').forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            const href = this.href;
-            showNotification("Warning: You are leaving coffeemanhell.", () => window.open(href, "_blank"));
-        });
+        link.addEventListener("click", handlePageLinkClick);
     });
 
     document.querySelectorAll(".custom-button").forEach(button => {
-        button.addEventListener("click", () => {
-            elements.clickSound.currentTime = 0;
-            elements.clickSound.play().catch(error => console.error("Click sound play failed:", error));
-        });
+        button.addEventListener("click", handleCustomButtonClick);
     });
 
     disableContextMenu();
     disableTextSelection();
 
     // Page loading animation
-    window.addEventListener("load", function() {
+    window.addEventListener("load", () => {
         setTimeout(() => {
             elements.loadingBarContainer.style.opacity = "0";
             elements.mainContent.style.display = "block";

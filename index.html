@@ -30,11 +30,13 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            color: rgb(225, 225, 225);
+            color: #E1E1E1;
             padding: 20px;
         }
         body.loading #main-content { display: none; }
         body.loading { background-color: black; overflow: hidden; }
+        #notification-overlay.hidden { display: none; }
+        #notification-overlay.visible { display: block; }
     </style>
 </head>
 <body class="loading">
