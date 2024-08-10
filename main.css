@@ -150,13 +150,6 @@ p {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
-#main-content {
-    opacity: 1;
-    transition: opacity 0.5s ease-in;
-}
-body.loaded #main-content {
-    opacity: 1;
-}
 body.loading {
     overflow: hidden;
 }
@@ -221,7 +214,7 @@ body.loading {
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
-    font-family: 'IBM2', sans-serif;
+    font-family: 'IBM2';
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
