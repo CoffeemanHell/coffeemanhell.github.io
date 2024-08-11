@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const snowflakes = [];
   let isSnowing = false;
 
-  const isWinterMonth = () => [8, 1].includes(new Date().getMonth() + 1); // Date
+  const isWinterMonth = () => [12, 1].includes(new Date().getMonth() + 1); // Date
 
   function createSnowflake() {
     const snowflake = document.createElement('div');
