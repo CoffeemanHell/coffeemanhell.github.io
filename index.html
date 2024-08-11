@@ -7,12 +7,14 @@
     <meta name="description" content="coffeeman.hell Custom page.">
     <meta http-equiv="Cache-Control" content="public, max-age=3600">
     <title>CoffeeMan.Hell</title>
-    <link rel="icon" href="assets/images/coffeeman.webp" type="image/webp">
-    <link rel="preload" href="main.css?v=1.0.2" as="style">
-    <link rel="stylesheet" href="main.css?v=1.0.2">
-    <link rel="preload" href="assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="icon" href="source/assets/images/coffeeman.webp" type="image/webp">
+    <link rel="preload" href="source/main.css?v=1.0.3" as="style">
+    <link rel="stylesheet" href="source/main.css?v=1.0.3">
+    <link rel="preload" href="source/assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="source/assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true" as="image">
+    <link rel="stylesheet" href="source/Snow Effect/snow-effect.css">
+    <script src="source/Snow Effect/snow-effect.js"></script>
     <style>
         body {
             font-family: 'IBM';
@@ -20,7 +22,7 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
-            background: url('assets/images/background.avif') no-repeat center center fixed;
+            background: url('source/assets/images/background.avif') no-repeat center center fixed;
             background-size: cover;
         }
         .container {
@@ -38,6 +40,7 @@
     </style>
 </head>
 <body class="loading">
+    <div id="snow-container"></div>
     <div id="loading-bar-container">
         <div id="loading-bar"></div>
     </div>
@@ -53,7 +56,7 @@
     <div id="main-content">
         <div class="overlay"></div>
         <video id="backgroundVideo" loop muted preload="none" loading="lazy" aria-hidden="true">
-            <source src="assets/images/cola.webm" type="video/webm">
+            <source src="source/assets/images/cola.webm" type="video/webm">
         </video>
         <div class="container" id="main-page">
             <h1>CoffeeMan.Hell</h1>
@@ -78,11 +81,11 @@
             </div>
         </div>
         <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
-        <audio id="backgroundMusic" preload="none" src="assets/sound/cola.opus" loop></audio>
+        <audio id="backgroundMusic" preload="none" src="source/assets/sound/cola.opus" loop></audio>
     </div>
     <audio id="clickSound" preload="auto">
-        <source src="assets/sound/click.opus" type="audio/ogg">
+        <source src="source/assets/sound/click.opus" type="audio/ogg">
     </audio>
-    <script src="script.js?v=1.0.1" defer></script>
+    <script src="source/script.js?v=1.0.3" defer></script>
 </body>
 </html>
