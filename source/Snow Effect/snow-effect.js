@@ -3,89 +3,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const snowflakes = [];
   let isSnowing = false;
 
-  function isWinterMonth() {
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    
-    return (month === 12) ||              // Whole December
-           (month === 1);                 // Whole January
-  }  
+  const isWinterMonth = () => [8, 1].includes(new Date().getMonth() + 1); // Date
 
   function createSnowflake() {
-    if (!isWinterMonth()) return;
-
     const snowflake = document.createElement('div');
     snowflake.className = 'snowflake';
     const size = Math.random() * 5 + 2;
-    snowflake.style.width = `${size}px`;
-    snowflake.style.height = `${size}px`;
-    snowflake.style.left = `${Math.random() * 100}%`;
-    snowflake.style.top = '-5px';
-    
-    const speed = Math.random() * 1 + 0.5;
-    const horizontalSpeed = Math.random() * 2 - 1;
-    
-    snowContainer.appendChild(snowflake);
-    
+    snowflake.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      top: -5px;
+    `;
+
     snowflakes.push({
       element: snowflake,
       x: parseFloat(snowflake.style.left),
       y: parseFloat(snowflake.style.top),
-      speed: speed,
-      horizontalSpeed: horizontalSpeed
+      speed: Math.random() * 1 + 0.5,
+      horizontalSpeed: Math.random() * 2 - 1,
     });
+
+    snowContainer.appendChild(snowflake);
   }
 
   function moveSnowflakes() {
-    if (!isWinterMonth()) {
-      if (isSnowing) {
-        isSnowing = false;
-        snowflakes.forEach(flake => flake.element.remove());
-        snowflakes.length = 0;
-      }
-      return;
-    }
-
-    if (!isSnowing) {
-      isSnowing = true;
-    }
-
-    const containerHeight = snowContainer.clientHeight;
-    const containerWidth = snowContainer.clientWidth;
-
-    snowflakes.forEach((flake, index) => {
+    snowflakes.forEach((flake, i) => {
       flake.y += flake.speed;
       flake.x += flake.horizontalSpeed;
 
-      if (flake.y > containerHeight) {
-        snowflakes.splice(index, 1);
+      if (flake.y > snowContainer.clientHeight) {
+        snowflakes.splice(i, 1);
         flake.element.remove();
       } else {
         flake.element.style.transform = `translate3d(${flake.x}px, ${flake.y}px, 0)`;
       }
     });
 
-    requestAnimationFrame(moveSnowflakes);
+    if (isSnowing) requestAnimationFrame(moveSnowflakes);
   }
 
-  // Snowfall control loop
   function checkSnowfall() {
     if (isWinterMonth()) {
       if (!isSnowing) {
-        // Start snowfall
         isSnowing = true;
         setInterval(createSnowflake, 100);
         moveSnowflakes();
       }
-    } else {
+    } else if (isSnowing) {
       isSnowing = false;
+      snowflakes.forEach(flake => flake.element.remove());
+      snowflakes.length = 0;
     }
   }
 
-  // Check every hour
-  setInterval(checkSnowfall, 3600000); // 3600000 ms = 1 saat
-
-  // Do the first check when the page loads
+  setInterval(checkSnowfall, 3600000); // 1 hour
   checkSnowfall();
 });
