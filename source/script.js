@@ -87,10 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             showPage(this.dataset.page);
         });
     });
-
-    document.querySelectorAll('a[href^="http"]').forEach(link => {
-        link.addEventListener("click", handlePageLinkClick);
-    });
+// Show notification when clicking on links
+/*
+document.querySelectorAll('a[href^="http"]').forEach(link => {
+    link.addEventListener("click", handlePageLinkClick);
+});
+*/
 
     document.querySelectorAll(".custom-button").forEach(button => {
         button.addEventListener("click", handleCustomButtonClick);
