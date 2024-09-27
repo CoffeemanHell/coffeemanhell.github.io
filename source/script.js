@@ -20,10 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (body.classList.contains("video-background")) {
             backgroundVideo.style.display = "block";
             backgroundVideo.currentTime = 0;
-            Promise.all([
-                backgroundVideo.play().catch(error => console.error("Video play failed:", error)),
-                backgroundMusic.play().catch(error => console.error("Music play failed:", error))
-            ]);
+            backgroundVideo.play().catch(error => console.error("Video play failed:", error));
+            backgroundMusic.play().catch(error => console.error("Music play failed:", error));
         } else {
             backgroundVideo.style.display = "none";
             backgroundVideo.pause();
@@ -79,38 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
         clickSound.play().catch(error => console.error("Click sound play failed:", error));
     };
 
-    elements.toggleButton.addEventListener("click", toggleMedia);
-
-    document.querySelectorAll(".custom-button[data-page]").forEach(button => {
-        button.addEventListener("click", function(event) {
+    // Event delegation for buttons with data-page attribute
+    document.body.addEventListener("click", (event) => {
+        const button = event.target.closest(".custom-button[data-page]");
+        if (button) {
             event.preventDefault();
-            showPage(this.dataset.page);
-        });
+            showPage(button.dataset.page);
+            handleCustomButtonClick();
+        }
     });
-// Show notification when clicking on links
-/*
-document.querySelectorAll('a[href^="http"]').forEach(link => {
-    link.addEventListener("click", handlePageLinkClick);
-});
-*/
 
-    document.querySelectorAll(".custom-button").forEach(button => {
-        button.addEventListener("click", handleCustomButtonClick);
-    });
+    elements.toggleButton.addEventListener("click", toggleMedia);
 
     disableContextMenu();
     disableTextSelection();
 
-    // Page loading animation
+    // Page loading animation with CSS transitions
     window.addEventListener("load", () => {
+        elements.loadingBarContainer.style.opacity = "0";
+        elements.mainContent.style.display = "block";
         setTimeout(() => {
-            elements.loadingBarContainer.style.opacity = "0";
-            elements.mainContent.style.display = "block";
-            setTimeout(() => {
-                elements.loadingBarContainer.style.display = "none";
-                elements.body.classList.remove("loading");
-                elements.body.classList.add("loaded");
-            }, 1000);
-        }, 100);
+            elements.loadingBarContainer.style.display = "none";
+            elements.body.classList.remove("loading");
+            elements.body.classList.add("loaded");
+        }, 1000);
     });
 });
