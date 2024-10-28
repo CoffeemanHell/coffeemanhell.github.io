@@ -14,19 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const toggleMedia = () => {
-        const { body, backgroundVideo, backgroundMusic } = elements;
-        body.classList.toggle("video-background");
+        elements.body.classList.toggle("video-background");
+        const isVideoBackground = elements.body.classList.contains("video-background");
 
-        if (body.classList.contains("video-background")) {
-            backgroundVideo.style.display = "block";
-            backgroundVideo.currentTime = 0;
-            backgroundVideo.play().catch(error => console.error("Video play failed:", error));
-            backgroundMusic.play().catch(error => console.error("Music play failed:", error));
+        elements.backgroundVideo.style.display = isVideoBackground ? "block" : "none";
+        if (isVideoBackground) {
+            elements.backgroundVideo.currentTime = 0;
+            elements.backgroundVideo.play().catch(error => console.error("Video play failed:", error));
+            elements.backgroundMusic.play().catch(error => console.error("Music play failed:", error));
         } else {
-            backgroundVideo.style.display = "none";
-            backgroundVideo.pause();
-            backgroundMusic.pause();
-            backgroundMusic.currentTime = 0;
+            elements.backgroundVideo.pause();
+            elements.backgroundMusic.pause();
+            elements.backgroundMusic.currentTime = 0;
         }
     };
 
@@ -38,20 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const showNotification = (message, confirmCallback) => {
-        const { notificationMessage, notificationOverlay, notificationConfirm, notificationCancel } = elements;
-        notificationMessage.textContent = message;
-        notificationOverlay.classList.remove("hidden");
-        notificationOverlay.classList.add("visible");
-        notificationConfirm.onclick = () => hideNotification(confirmCallback);
-        notificationCancel.onclick = hideNotification;
-        notificationOverlay.onclick = hideNotification;
+        elements.notificationMessage.textContent = message;
+        elements.notificationOverlay.classList.remove("hidden");
+        elements.notificationOverlay.classList.add("visible");
+        
+        elements.notificationConfirm.onclick = () => hideNotification(confirmCallback);
+        elements.notificationCancel.onclick = hideNotification;
+        elements.notificationOverlay.onclick = hideNotification;
+        
         document.getElementById("notification-box").onclick = event => event.stopPropagation();
     };
 
     const hideNotification = (callback) => {
-        const { notificationOverlay } = elements;
-        notificationOverlay.classList.remove("visible");
-        notificationOverlay.classList.add("hidden");
+        elements.notificationOverlay.classList.remove("visible");
+        elements.notificationOverlay.classList.add("hidden");
         if (callback) callback();
     };
 
@@ -60,8 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const disableTextSelection = () => {
-        const { body } = elements;
-        body.classList.add('no-select');
+        elements.body.classList.add('no-select');
         document.addEventListener('selectstart', e => e.preventDefault());
     };
 
@@ -72,12 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleCustomButtonClick = () => {
-        const { clickSound } = elements;
-        clickSound.currentTime = 0;
-        clickSound.play().catch(error => console.error("Click sound play failed:", error));
+        elements.clickSound.currentTime = 0;
+        elements.clickSound.play().catch(error => console.error("Click sound play failed:", error));
     };
 
-    // Event delegation for buttons with data-page attribute
+    const lazyLoadImages = () => {
+        const lazyImages = document.querySelectorAll('img.lazy');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.onload = () => {
+                        img.classList.remove('lazy');
+                        img.style.opacity = 1;
+                    };
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(image => {
+            imageObserver.observe(image);
+        });
+    };
+
     document.body.addEventListener("click", (event) => {
         const button = event.target.closest(".custom-button[data-page]");
         if (button) {
@@ -92,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     disableContextMenu();
     disableTextSelection();
 
-    // Page loading animation with CSS transitions
     window.addEventListener("load", () => {
         elements.loadingBarContainer.style.opacity = "0";
         elements.mainContent.style.display = "block";
@@ -101,5 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.body.classList.remove("loading");
             elements.body.classList.add("loaded");
         }, 1000);
+        lazyLoadImages();
     });
 });

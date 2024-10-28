@@ -13,6 +13,7 @@
     src: url('assets/fonts/IBM2.ttf') format('truetype');
     font-display: swap;
 }
+
 /* Background Video */
 #backgroundVideo {
     position: fixed;
@@ -26,6 +27,7 @@
     object-fit: cover;
     display: none;
 }
+
 /* Minimal Button */
 .minimal-button {
     position: fixed;
@@ -40,9 +42,11 @@
     z-index: 3;
     transition: background-color 0.3s ease;
 }
+
 .minimal-button:hover {
     background-color: rgba(255, 0, 0, 0.3);
 }
+
 .minimal-button::after {
     content: '';
     position: absolute;
@@ -56,9 +60,11 @@
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
 .minimal-button:hover::after {
     opacity: 1;
 }
+
 /* Overlay */
 .overlay {
     position: fixed;
@@ -69,24 +75,29 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
+
 /* Typography */
 h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
 }
+
 p {
     font-size: 1.2em;
     line-height: 1.5;
     font-weight: 900;
 }
+
 /* Discord Status */
 .discord-status {
     margin: 20px 0;
 }
+
 .discord-status img {
     max-width: 100%;
     height: auto;
 }
+
 /* Button Container */
 .button-container {
     display: flex;
@@ -95,6 +106,7 @@ p {
     gap: 15px;
     margin: 20px 0;
 }
+
 /* Custom Button */
 .custom-button {
     display: inline-block;
@@ -114,16 +126,20 @@ p {
     font-family: 'IBM2';
     font-size: 16px;
 }
+
 .custom-button span {
     display: inline-block;
     transition: transform 0.3s ease;
 }
+
 .custom-button:hover {
     background-color: rgba(34, 34, 34, 0.3);
 }
+
 .custom-button:hover span {
     transform: scale(1.1);
 }
+
 /* Loading Bar */
 #loading-bar-container {
     position: fixed;
@@ -138,6 +154,7 @@ p {
     align-items: center;
     transition: opacity 0.5s ease-out;
 }
+
 #loading-bar {
     width: 100%;
     height: 2px;
@@ -146,22 +163,27 @@ p {
     animation: loadingAnimation 1.5s linear infinite;
     border-radius: 5px;
 }
+
 @keyframes loadingAnimation {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+
 body.loading {
     overflow: hidden;
 }
+
 /* Notification Overlay */
 @keyframes fadeInScale {
     from { opacity: 0; transform: scale(0.2); }
     to { opacity: 1; transform: scale(1); }
 }
+
 @keyframes fadeOutScale {
     from { opacity: 1; transform: scale(1); }
     to { opacity: 0; transform: scale(0.2); }
 }
+
 #notification-overlay {
     inset: 0;
     position: fixed;
@@ -179,10 +201,12 @@ body.loading {
     transition: opacity 0.3s ease-out;
     pointer-events: none;
 }
+
 #notification-overlay.visible {
     opacity: 1;
     pointer-events: all;
 }
+
 #notification-box {
     background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -196,18 +220,22 @@ body.loading {
     max-width: 300px;
     animation: fadeInScale 0.1s ease-out;
 }
+
 #notification-box.hiding {
     animation: fadeOutScale 0.3s ease-in forwards;
 }
+
 #notification-message {
     font-size: 1em;
     margin-bottom: 20px;
 }
+
 .notification-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
+
 .notification-buttons .custom-button {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -220,22 +248,28 @@ body.loading {
     transition: all 0.3s ease;
     min-width: 100px;
 }
+
 .notification-buttons .custom-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.5);
 }
+
 #notification-confirm {
     background-color: rgba(0, 128, 0, 0);
 }
+
 #notification-confirm:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
+
 #notification-cancel {
     background-color: transparent;
 }
+
 #notification-cancel:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
+
 /* Media Queries */
 @media (max-width: 480px) {
     body { font-size: 12px; }
@@ -256,6 +290,7 @@ body.loading {
         gap: 10px;
     }
 }
+
 /* Error Page */
 .error-page .container {
     display: flex;
@@ -264,35 +299,39 @@ body.loading {
     align-items: center;
     height: auto;
 }
+
 .error-page h1 {
     font-size: 6em;
     margin-bottom: 10px;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
+
 .error-image {
     margin: 20px 0;
 }
+
 #error-coffee {
     width: 150px;
     height: auto;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
+
 #error-coffee:hover {
     transform: scale(1.1);
 }
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
     20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
+
 #error-coffee.shake {
     animation: shake 0.5s;
 }
+
 /* Utility Classes */
 .no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
