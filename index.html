@@ -62,9 +62,11 @@
 
     <div id="main-content">
         <div class="overlay"></div>
-        <video id="backgroundVideo" loop muted preload="none" loading="lazy" aria-hidden="true">
-            <source src="source/assets/images/cola.webm" type="video/webm">
+        <video id="backgroundVideo" loop autoplay preload="auto" loading="lazy" aria-hidden="true">
+            <source src="source/assets/images/crs.mp4" type="video/mp4">
+            Tarayıcınız bu videoyu desteklemiyor.
         </video>
+        
         
         <div class="container" id="main-page">
             <h1>CoffeeMan.Hell</h1>
@@ -83,22 +85,16 @@
         </div>
 
         <div class="container" id="about-page" style="display: none;">
-            <h1>About CoffeeMan.Hell</h1>
+            <h1>CoffeeMan.Hell</h1>
             <p>Fucking Hell, there's nothing here.
             <p> Coffee &lt;3</p>
-            </p>
             <div class="button-container">
                 <a href="#" class="custom-button" data-page="main"><span>Back to Main</span></a>
             </div>
         </div>
 
         <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
-        <audio id="backgroundMusic" preload="none" src="source/assets/sound/cola.opus" loop></audio>
     </div>
-    
-    <audio id="clickSound" preload="auto">
-        <source src="source/assets/sound/click.opus" type="audio/ogg">
-    </audio>
 
     <script src="source/script.js?v=1.0.3" defer></script>
 </body>
