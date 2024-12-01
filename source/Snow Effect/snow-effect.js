@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const isWinterMonth = () => [12, 1].includes(new Date().getMonth() + 1); // Date
 
   function createSnowflake() {
+    if (!document.hasFocus()) return; // Create a snowflake if the page is not in focus
+
     const snowflake = document.createElement('div');
     snowflake.className = 'snowflake';
     const size = Math.random() * 5 + 2;
