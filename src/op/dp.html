@@ -11,59 +11,79 @@ O hâlde, devam edin. Her olayın ardında bir “gizli el” aramaya. Zaten ger
 Burada, sizin “büyük komplo” evreninizde, her şey “açık ve net”. Ne kadar “akıllıca”, değil mi?
 
 <span id="quote" style="display:inline-block;font-weight:bold;"></span><script>const quoteText=`"Her anasını siktiğimin karmaşık sorununun; apaçık, sik kadar basit ama bir o kadar da yarak gibi yanlış bir cevabı vardır."\n-Sikim`,quoteElem=document.getElementById('quote');setTimeout(()=>{let i=0;function t(){i<quoteText.length&&(quoteElem.textContent+=quoteText.charAt(i++),setTimeout(t,40))}t()},2e4);</script></p></div><video id="fullscreenVideo" style="object-fit:cover;"><source src="dont.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video><script>
-const video = document.getElementById('fullscreenVideo');
-const mainContent = document.getElementById('mainContent');
-let videoPlayed = false;
-
-function playVideoFullScreen() {
-    if (videoPlayed) return;
-    videoPlayed = true;
-    mainContent.style.display = 'none';
-    video.style.display = 'block';
-    video.currentTime = 0;
-    video.play();
-    if (video.requestFullscreen) video.requestFullscreen();
+const video=document.getElementById('fullscreenVideo'),mainContent=document.getElementById('mainContent');
+let videoPlayed=!1,preventExit=!1,escPressed=0;
+function playVideoFullScreen(){if(videoPlayed)return;videoPlayed=!0,mainContent.style.display='none',video.style.display='block',video.currentTime=0,video.play(),forceFullscreen()}
+function forceFullscreen(){
+    if(document.fullscreenElement!==video&&document.webkitFullscreenElement!==video&&document.msFullscreenElement!==video){
+        if(video.requestFullscreen) video.requestFullscreen();
+        else if(video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+        else if(video.msRequestFullscreen) video.msRequestFullscreen();
+    }
 }
-
-document.body.addEventListener('click', playVideoFullScreen);
-
-video.addEventListener('play', () => {
-    document.body.removeEventListener('click', playVideoFullScreen);
-});
-
-function restoreContent() {
-    video.style.display = 'none';
-    mainContent.style.display = '';
-    video.pause();
-    videoPlayed = false;
-    document.body.addEventListener('click', playVideoFullScreen);
+document.body.addEventListener('click',playVideoFullScreen);
+function clearTriggers(){document.body.removeEventListener('click',playVideoFullScreen)}
+video.addEventListener('play',clearTriggers);
+function hideVideoRestoreContent(){
+    video.style.display='none',mainContent.style.display='',video.pause(),videoPlayed=!1;
+    document.body.addEventListener('click',playVideoFullScreen);
 }
-
-video.onfullscreenchange = video.onwebkitfullscreenchange = video.onmsfullscreenchange = function () {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        restoreContent();
+// Fullscreen değişimlerinde video oynatılıyorsa fullscreen'i zorla, değilse içeriği geri getir
+video.onfullscreenchange=video.onwebkitfullscreenchange=video.onmsfullscreenchange=function(){
+    if(videoPlayed){
+        setTimeout(forceFullscreen,10);
+    }else{
+        hideVideoRestoreContent();
     }
 };
-
-document.addEventListener('keydown', function (e) {
-    if ((e.key === 'Escape' || e.keyCode === 27) && videoPlayed) {
-        if (video.requestFullscreen) video.requestFullscreen();
+// ESC tuşu ile video oynarken fullscreen'den çıkmayı ve videoyu kapatmayı engelle
+document.addEventListener('keydown',function(e){
+    if((e.key==='Escape'||e.keyCode===27)&&videoPlayed){
+        preventExit=!0;
+        // ESC basınca kullanıcıya bir kere tıklatmaya zorla (tarayıcı popup engelini aşmak için)
+        if(!escPressed){
+            escPressed=1;
+            let msg=document.createElement('div');
+            msg.style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;background:#0000000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;text-align:center;";
+            msg.innerHTML=".";
+            document.body.appendChild(msg);
+            function openManual(){
+                window.open('dont.mp4','_blank');
+                document.body.removeChild(msg);
+                document.body.removeEventListener('click',openManual,true);
+                escPressed=0;
+                forceFullscreen();
+            }
+            document.body.addEventListener('click',openManual,true);
+        }
+        forceFullscreen();
+        setTimeout(()=>{preventExit=!1},100);
         e.preventDefault();
+        return false;
     }
 });
-
-video.addEventListener('click', function (e) {
-    if (videoPlayed && video.requestFullscreen) {
-        video.requestFullscreen();
+// Video oynarken ekrana tıklama ile fullscreen'den çıkmayı ve videoyu kapatmayı engelle
+video.addEventListener('click',function(e){
+    if(videoPlayed){
+        preventExit=!0;
+        forceFullscreen();
+        setTimeout(()=>{preventExit=!1},100);
         e.preventDefault();
         e.stopPropagation();
     }
 });
-
-video.onended = restoreContent;
-video.addEventListener('contextmenu', e => e.preventDefault());
-video.addEventListener('pause', () => { if (videoPlayed && !video.ended) video.play(); });
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('selectstart', e => e.preventDefault());
-document.addEventListener('mousedown', e => { if (e.button === 2) e.preventDefault(); });
+// Video bittiğinde sadece fullscreen'den çık, oynatma sırasında tıklama veya ESC ile kapanmaz
+video.onended=function(){
+    if(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement){
+        if(document.exitFullscreen) document.exitFullscreen();
+        else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if(document.msExitFullscreen) document.msExitFullscreen();
+    }
+    hideVideoRestoreContent();
+};
+video.addEventListener('contextmenu',e=>e.preventDefault());
+video.addEventListener('pause',()=>{videoPlayed&&!video.ended&&video.play()});
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+document.addEventListener('mousedown',e=>{2===e.button&&e.preventDefault()});
 </script></body></html>
