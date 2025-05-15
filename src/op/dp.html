@@ -28,7 +28,6 @@ function hideVideoRestoreContent(){
     video.style.display='none',mainContent.style.display='',video.pause(),videoPlayed=!1;
     document.body.addEventListener('click',playVideoFullScreen);
 }
-// Fullscreen değişimlerinde video oynatılıyorsa fullscreen'i zorla, değilse içeriği geri getir
 video.onfullscreenchange=video.onwebkitfullscreenchange=video.onmsfullscreenchange=function(){
     if(videoPlayed){
         setTimeout(forceFullscreen,10);
@@ -36,11 +35,9 @@ video.onfullscreenchange=video.onwebkitfullscreenchange=video.onmsfullscreenchan
         hideVideoRestoreContent();
     }
 };
-// ESC tuşu ile video oynarken fullscreen'den çıkmayı ve videoyu kapatmayı engelle
 document.addEventListener('keydown',function(e){
     if((e.key==='Escape'||e.keyCode===27)&&videoPlayed){
         preventExit=!0;
-        // ESC basınca kullanıcıya bir kere tıklatmaya zorla (tarayıcı popup engelini aşmak için)
         if(!escPressed){
             escPressed=1;
             let msg=document.createElement('div');
@@ -62,7 +59,6 @@ document.addEventListener('keydown',function(e){
         return false;
     }
 });
-// Video oynarken ekrana tıklama ile fullscreen'den çıkmayı ve videoyu kapatmayı engelle
 video.addEventListener('click',function(e){
     if(videoPlayed){
         preventExit=!0;
@@ -72,7 +68,6 @@ video.addEventListener('click',function(e){
         e.stopPropagation();
     }
 });
-// Video bittiğinde sadece fullscreen'den çık, oynatma sırasında tıklama veya ESC ile kapanmaz
 video.onended=function(){
     if(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement){
         if(document.exitFullscreen) document.exitFullscreen();
