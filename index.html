@@ -7,22 +7,22 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.app; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none';">
     <meta http-equiv="Cache-Control" content="public, max-age=3600">
     <title>coffeeman.hell</title>
-    <link rel="icon" href="source/assets/images/coffeeman.webp" type="image/webp">
+    <link rel="icon" href="src/assets/images/coffeeman.webp" type="image/webp">
     <!-- Preload CSS -->
-    <link rel="preload" href="source/main.css?v=1.0.4" as="style">
-    <link rel="stylesheet" href="source/main.css?v=1.0.4">
+    <link rel="preload" href="src/main.css?v=1.0.4" as="style">
+    <link rel="stylesheet" href="src/main.css?v=1.0.4">
     <!-- Preload Fonts -->
-    <link rel="preload" href="source/assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="source/assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="src/assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="src/assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
     <!-- Preload Images -->
     <link rel="preload" href="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true" as="image">
     <!-- Snow Effect Styles and Scripts -->
-    <link rel="stylesheet" href="source/Snow Effect/snow-effect.css">
-    <script src="source/Snow Effect/snow-effect.js" defer></script>
-    <link rel="stylesheet" href="source\Fire Effect\fire-effect.css">
-    <script src="source\Fire Effect\fire-effect.js"></script>
+    <link rel="stylesheet" href="src/Snow Effect/snow-effect.css">
+    <script src="src/Snow Effect/snow-effect.js" defer></script>
+    <link rel="stylesheet" href="src\Fire Effect\fire-effect.css">
+    <script src="src\Fire Effect\fire-effect.js"></script>
     <style>
-        body{font-family:'IBM';margin:0;padding:0;height:100vh;overflow:hidden;background:url('source/assets/images/background.avif') no-repeat center center fixed;background-size:cover}
+        body{font-family:'IBM';margin:0;padding:0;height:100vh;overflow:hidden;background:url('src/assets/images/background.avif') no-repeat center center fixed;background-size:cover}
         .container{width:90%;max-width:800px;margin:50px auto;position:relative;z-index:2;text-align:center;color:#E1E1E1;padding:20px}
         body.loading #main-content{display:none}
         body.loading{background-color:black;overflow:hidden}
@@ -48,7 +48,7 @@
     <div id="main-content">
         <div class="overlay"></div>
         <video id="backgroundVideo" loop autoplay preload="metadata" loading="lazy" aria-hidden="true">
-            <source src="source/assets/images/crs.mp4" type="video/mp4">
+            <source src="src/assets/images/crs.mp4" type="video/mp4">
             Tarayıcınız bu videoyu desteklemiyor.
         </video>
         <div class="container" id="main-page">
@@ -79,8 +79,8 @@
         <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
     </div>
     <audio id="clickSound" preload="auto">
-        <source src="source/assets/sound/click.opus" type="audio/ogg">
+        <source src="src/assets/sound/click.opus" type="audio/ogg">
     </audio>
-    <script src="source/script.js?v=1.0.3" defer></script>
+    <script src="src/script.js?v=1.0.3" defer></script>
 </body>
 </html>
