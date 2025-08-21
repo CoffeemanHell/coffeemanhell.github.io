@@ -1,86 +1,174 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="coffeeman.hell Custom page.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.app; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none';">
-    <meta http-equiv="Cache-Control" content="public, max-age=3600">
-    <title>coffeeman.hell</title>
-    <link rel="icon" href="src/assets/images/coffeeman.webp" type="image/webp">
-    <!-- Preload CSS -->
-    <link rel="preload" href="src/main.css?v=1.0.4" as="style">
-    <link rel="stylesheet" href="src/main.css?v=1.0.4">
-    <!-- Preload Fonts -->
-    <link rel="preload" href="src/assets/fonts/IBM.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="src/assets/fonts/IBM2.ttf" as="font" type="font/ttf" crossorigin>
-    <!-- Preload Images -->
-    <link rel="preload" href="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true" as="image">
-    <!-- Snow Effect Styles and Scripts -->
-    <link rel="stylesheet" href="src/Snow Effect/snow-effect.css">
-    <script src="src/Snow Effect/snow-effect.js" defer></script>
-    <link rel="stylesheet" href="src\Fire Effect\fire-effect.css">
-    <script src="src\Fire Effect\fire-effect.js"></script>
-    <style>
-        body{font-family:'IBM';margin:0;padding:0;height:100vh;overflow:hidden;background:url('src/assets/images/background.avif') no-repeat center center fixed;background-size:cover}
-        .container{width:90%;max-width:800px;margin:50px auto;position:relative;z-index:2;text-align:center;color:#E1E1E1;padding:20px}
-        body.loading #main-content{display:none}
-        body.loading{background-color:black;overflow:hidden}
-    </style>
-</head>
-<body class="loading">
-    <div id="snow-container"></div>
-    <div id="fire-container"></div>
-    <div id="loading-bar-container">
-        <div id="loading-bar"></div>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="coffeeman.hell Custom page." />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.app; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none';"
+        />
+        <meta http-equiv="Cache-Control" content="public, max-age=3600" />
+        <title>coffeeman.hell</title>
+        <link
+            rel="icon"
+            href="src/assets/images/coffeeman.webp"
+            type="image/webp"
+        />
+        <!-- Preload CSS -->
+        <link rel="preload" href="src/main.css?v=1.0.4" as="style" />
+        <link rel="stylesheet" href="src/main.css?v=1.0.4" />
+        <!-- Preload Fonts -->
+        <link
+            rel="preload"
+            href="src/assets/fonts/IBM.ttf"
+            as="font"
+            type="font/ttf"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="src/assets/fonts/IBM2.ttf"
+            as="font"
+            type="font/ttf"
+            crossorigin
+        />
+        <!-- Preload Images -->
+        <link
+            rel="preload"
+            href="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true"
+            as="image"
+        />
+        <!-- Snow Effect Styles and Scripts -->
+        <link rel="stylesheet" href="src/Snow Effect/snow-effect.css" />
+        <script src="src/Snow Effect/snow-effect.js" defer></script>
+        <link rel="stylesheet" href="src\Fire Effect\fire-effect.css" />
+        <script src="src\Fire Effect\fire-effect.js"></script>
+        <style>
+            body {
+                font-family: "IBM";
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                overflow: hidden;
+                background: url("src/assets/images/background.webp") no-repeat
+                    center center fixed;
+                background-size: cover;
+            }
+            .container {
+                width: 90%;
+                max-width: 800px;
+                margin: 50px auto;
+                position: relative;
+                z-index: 2;
+                text-align: center;
+                color: #e1e1e1;
+                padding: 200px;
+            }
+            body.loading #main-content {
+                display: none;
+            }
+            body.loading {
+                background-color: black;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body class="loading">
+        <div id="snow-container"></div>
+        <div id="fire-container"></div>
+        <div id="loading-bar-container">
+            <div id="loading-bar"></div>
+        </div>
 
-    <div id="notification-overlay" class="hidden">
-        <div id="notification-box">
-            <p id="notification-message"></p>
-            <div class="notification-buttons">
-                <button id="notification-cancel" class="custom-button" aria-label="Cancel">No</button>
-                <button id="notification-confirm" class="custom-button" aria-label="Confirm">Yes</button>
+        <div id="notification-overlay" class="hidden">
+            <div id="notification-box">
+                <p id="notification-message"></p>
+                <div class="notification-buttons">
+                    <button
+                        id="notification-cancel"
+                        class="custom-button"
+                        aria-label="Cancel"
+                    >
+                        No
+                    </button>
+                    <button
+                        id="notification-confirm"
+                        class="custom-button"
+                        aria-label="Confirm"
+                    >
+                        Yes
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="main-content">
-        <div class="overlay"></div>
-        <video id="backgroundVideo" loop autoplay preload="metadata" loading="lazy" aria-hidden="true">
-            <source src="src/assets/images/skm.mp4" type="video/mp4">
-            Tarayıcınız bu videoyu desteklemiyor.
-        </video>
-        <div class="container" id="main-page">
-            <h1>coffeeman.hell</h1>
-            <p>More Coffee?</p>
-            <div class="discord-status">
-                <a href="https://discord.com/users/406416295349714944" target="_blank" rel="noopener">
-                    <img src="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true&hideTimestamp=true" alt="Discord Status" width="400" height="150">
-                </a>
+        <div id="main-content">
+            <div class="overlay"></div>
+            <video
+                id="backgroundVideo"
+                loop
+                autoplay
+                preload="metadata"
+                loading="lazy"
+                aria-hidden="true"
+            >
+                <source src="src/assets/images/skm.mp4" type="video/mp4" />
+                Tarayıcınız bu videoyu desteklemiyor.
+            </video>
+            <div class="container" id="main-page">
+                <h1>coffeeman.hell</h1>
+                <p>More Coffee?</p>
+                <div class="discord-status">
+                    <a
+                        href="https://discord.com/users/406416295349714944"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <img
+                            src="https://lanyard-profile-readme.vercel.app/api/406416295349714944?bg=00000050&borderRadius=7px&idleMessage=No%20coffee%20and%20exhausted&hideBadges=true&showDisplayName=true&hideTimestamp=true"
+                            alt="Discord Status"
+                            width="400"
+                            height="150"
+                        />
+                    </a>
+                </div>
+                <div class="button-container">
+                    <!--<a href="https://discord.gg/SxWKF4HsSY" target="_blank" rel="noopener" class="custom-button"><span>Join The Hell</span></a> -->
+                    <!--<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank" rel="noopener" class="custom-button"><span>Wallpaper Engine Projects</span></a> -->
+                    <a
+                        href="https://github.com/CoffeemanHell"
+                        target="_blank"
+                        rel="noopener"
+                        class="custom-button"
+                        ><span>GitHub</span></a
+                    >
+                    <a href="#" class="custom-button" data-page="about"
+                        ><span>About</span></a
+                    >
+                </div>
             </div>
-            <div class="button-container">
-                <!--<a href="https://discord.gg/SxWKF4HsSY" target="_blank" rel="noopener" class="custom-button"><span>Join The Hell</span></a> -->
-                <!--<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2489782244" target="_blank" rel="noopener" class="custom-button"><span>Wallpaper Engine Projects</span></a> -->
-                <a href="https://github.com/CoffeemanHell" target="_blank" rel="noopener" class="custom-button"><span>GitHub</span></a>
-                <a href="#" class="custom-button" data-page="about"><span>About</span></a>
+
+            <div class="container" id="about-page" style="display: none">
+                <h1>coffeeman.hell</h1>
+                <p>Fucking Hell, there's nothing here.</p>
+                <p>Coffee <3</p>
+                <div class="button-container">
+                    <a href="#" class="custom-button" data-page="main"
+                        ><span>Back to Main</span></a
+                    >
+                </div>
             </div>
+
+            <button
+                id="toggleButton"
+                class="minimal-button"
+                aria-label="Toggle background and music"
+            ></button>
         </div>
-
-        <div class="container" id="about-page" style="display: none;">
-            <h1>coffeeman.hell</h1>
-            <p>Fucking Hell, there's nothing here.</p>
-            <p> Coffee <3</p>
-            <div class="button-container">
-                <a href="#" class="custom-button" data-page="main"><span>Back to Main</span></a>
-            </div>
-        </div>
-
-        <button id="toggleButton" class="minimal-button" aria-label="Toggle background and music"></button>
-    </div>
-    <audio id="clickSound" preload="auto">
-        <source src="src/assets/sound/click.opus" type="audio/ogg">
-    </audio>
-    <script src="src/script.js?v=1.0.3" defer></script>
-</body>
+        <audio id="clickSound" preload="auto">
+            <source src="src/assets/sound/click.opus" type="audio/ogg" />
+        </audio>
+        <script src="src/script.js?v=1.0.3" defer></script>
+    </body>
 </html>

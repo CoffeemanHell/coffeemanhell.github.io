@@ -1,7 +1,85 @@
-#fire-container{position:fixed;bottom:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
-.fire-particle{position:absolute;border-radius:50%;pointer-events:none;will-change:transform,opacity}
-@keyframes rise-0{0%{transform:translate3d(0,0,0) scale(1);opacity:0}10%{opacity:1}100%{transform:translate3d(-30px,-100vh,0) scale(0);opacity:0}}
-@keyframes rise-1{0%{transform:translate3d(0,0,0) scale(1);opacity:0}10%{opacity:1}100%{transform:translate3d(30px,-100vh,0) scale(0);opacity:0}}
-@keyframes rise-2{0%{transform:translate3d(0,0,0) scale(1);opacity:0}10%{opacity:1}100%{transform:translate3d(-15px,-100vh,0) scale(0);opacity:0}}
-@keyframes rise-3{0%{transform:translate3d(0,0,0) scale(1);opacity:0}10%{opacity:1}100%{transform:translate3d(15px,-100vh,0) scale(0);opacity:0}}
-@keyframes flicker{0%{opacity:.7}25%{opacity:.9}50%{opacity:.6}75%{opacity:.8}100%{opacity:.7}}
+#fire-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+.fire-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+@keyframes rise-0 {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(-30px, -100vh, 0) scale(0);
+        opacity: 0;
+    }
+}
+@keyframes rise-1 {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(30px, -100vh, 0) scale(0);
+        opacity: 0;
+    }
+}
+@keyframes rise-2 {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(-15px, -100vh, 0) scale(0);
+        opacity: 0;
+    }
+}
+@keyframes rise-3 {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(15px, -100vh, 0) scale(0);
+        opacity: 0;
+    }
+}
+@keyframes flicker {
+    0% {
+        opacity: 0.7;
+    }
+    25% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    75% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}

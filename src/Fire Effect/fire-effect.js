@@ -1,10 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const fC = document.getElementById('fire-container') || (() => {
-    const cont = document.createElement('div');
-    cont.id = 'fire-container';
-    document.body.appendChild(cont);
-    return cont;
-  })();
+document.addEventListener("DOMContentLoaded", () => {
+  const fC =
+    document.getElementById("fire-container") ||
+    (() => {
+      const cont = document.createElement("div");
+      cont.id = "fire-container";
+      document.body.appendChild(cont);
+      return cont;
+    })();
 
   const fPs = [];
   let isB = false;
@@ -16,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const crFP = () => {
     if (!document.hasFocus()) return;
 
-    const p = document.createElement('div');
-    p.className = 'fire-particle';
+    const p = document.createElement("div");
+    p.className = "fire-particle";
 
     const size = Math.random() * 5 + 3;
     const opacity = Math.random() * 0.5 + 0.4;
@@ -31,14 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
       width: `${size}px`,
       height: `${size}px`,
       left: `${Math.random() * 100}%`,
-      bottom: '0',
+      bottom: "0",
       opacity: `${opacity}`,
       backgroundColor: `hsl(${hue}, ${sat}%, ${light}%)`,
       boxShadow: `0 0 ${size * 2}px hsl(${hue}, ${sat}%, ${light}%)`,
-      animation: `rise-${animType} ${animDur}s ease-out forwards, flicker ${Math.random() * 0.5 + 0.5}s infinite alternate`
+      animation: `rise-${animType} ${animDur}s ease-out forwards, flicker ${Math.random() * 0.5 + 0.5}s infinite alternate`,
     });
 
-    p.addEventListener('animationend', () => {
+    p.addEventListener("animationend", () => {
       p.remove();
       const index = fPs.indexOf(p);
       if (index > -1) fPs.splice(index, 1);
@@ -59,12 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isB) {
       isB = false;
       clearInterval(fireInterval);
-      fPs.forEach(p => p.remove());
+      fPs.forEach((p) => p.remove());
       fPs.length = 0;
     }
   };
 
-  const chkS = () => isSM() ? startFE() : stopFE();
+  const chkS = () => (isSM() ? startFE() : stopFE());
 
   setInterval(chkS, 3600000);
   chkS();

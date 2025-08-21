@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const sC = document.getElementById('snow-container');
+document.addEventListener("DOMContentLoaded", () => {
+  const sC = document.getElementById("snow-container");
   const sFs = [];
   let isS = false;
 
@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function crSF() {
     if (!document.hasFocus()) return;
 
-    const sF = document.createElement('div');
-    sF.className = 'snowflake';
+    const sF = document.createElement("div");
+    sF.className = "snowflake";
     const size = Math.random() * 5 + 2;
     const opacity = Math.random() * 0.5 + 0.4;
     sF.style.cssText = `width: ${size}px; height: ${size}px; left: ${Math.random() * 100}%; top: -5px; opacity: ${opacity}; transform: rotate(${Math.random() * 360}deg);`;
@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
       sF.y += sF.sp;
       sF.x += sF.hSp;
 
-      const rot = parseFloat(sF.el.style.transform.match(/rotate\((.*?)deg\)/)?.[1] || 0);
+      const rot = parseFloat(
+        sF.el.style.transform.match(/rotate\((.*?)deg\)/)?.[1] || 0,
+      );
       sF.el.style.transform = `rotate(${rot + sF.rSp}deg)`;
 
       if (sF.y > sC.clientHeight) {
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } else if (isS) {
       isS = false;
-      sFs.forEach(sF => sF.el.remove());
+      sFs.forEach((sF) => sF.el.remove());
       sFs.length = 0;
     }
   }
