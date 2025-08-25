@@ -119,4 +119,35 @@ document.addEventListener("DOMContentLoaded", () => {
     1000,
   );
   lazyLoad();
+
+  // ↑ ↑ ↓ ↓ ← → ← →
+  const konamiCode = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+  ];
+  let konamiIndex = 0;
+  document.addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    const expected = konamiCode[konamiIndex].toLowerCase();
+    if (key === expected) {
+      konamiIndex++;
+      if (konamiIndex === konamiCode.length) {
+        konamiIndex = 0;
+        // Video arka planını her seferinde görünür ve baştan oynat
+        el.body.classList.add("video-background");
+        el.bgVideo.style.display = "block";
+        el.bgVideo.currentTime = 0;
+        el.bgVideo.load(); // Videoyu yeniden yükle
+        el.bgVideo.play();
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
 });
