@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const el = {
     body: document.body,
-    toggleBtn: document.getElementById("toggleButton"),
     bgMusic: document.getElementById("backgroundMusic"),
     bgVideo: document.getElementById("backgroundVideo"),
     loadBar: document.getElementById("loading-bar-container"),
@@ -101,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  el.toggleBtn.addEventListener("click", toggleMedia);
   disableCtxMenu();
   disableTxtSel();
 
