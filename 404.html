@@ -32,11 +32,13 @@
             }
             .container {
                 text-align: center;
-                width: 80%;
+                width: 90%;
                 max-width: 400px;
+                padding: 20px;
+                box-sizing: border-box;
             }
             h1 {
-                font-size: 1.2em;
+                font-size: clamp(1rem, 3vw, 1.2rem);
                 margin-bottom: 15px;
                 display: inline-flex;
                 align-items: center;
@@ -92,6 +94,44 @@
             }
             .dot:nth-child(3) {
                 animation-delay: 0.4s;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                    padding: 15px;
+                }
+
+                h1 {
+                    font-size: clamp(0.9rem, 4vw, 1.1rem);
+                }
+            }
+
+            @media (max-width: 480px) {
+                .container {
+                    width: 95%;
+                    padding: 10px;
+                }
+
+                h1 {
+                    font-size: clamp(0.8rem, 4.5vw, 1rem);
+                    margin-bottom: 10px;
+                }
+
+                #loading-bar-container {
+                    height: 2px;
+                }
+            }
+
+            @media (max-width: 360px) {
+                .container {
+                    width: 98%;
+                    padding: 8px;
+                }
+
+                h1 {
+                    font-size: clamp(0.7rem, 5vw, 0.9rem);
+                }
             }
         </style>
     </head>
